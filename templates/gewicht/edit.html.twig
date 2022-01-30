@@ -1,0 +1,36 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Gewicht bearbeiten{% endblock %}
+
+{% block body %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">Gewicht bearbeiten</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Gewicht bearbeiten</h5>
+                            <h6>Bitte nur den Gewichtswert eingeben <b>OHNE</b> den Zusatz "kg"</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ include('gewicht/_form.html.twig', {'button_label': 'Update'}) }}
+
+                            <a href="{{ path('gewicht_index') }}">Zurück zur Übersicht</a>
+
+                            {{ include('gewicht/_delete_form.html.twig') }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+

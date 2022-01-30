@@ -1,0 +1,31 @@
+{% extends 'login.base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <div class="m-sm-4">
+                <form class="user" autocomplete="off" method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey }}</div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input class="form-control form-control-lg" type="email" name="email" id="inputEmail" placeholder="Email" autocomplete="off">
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input class="form-control form-control-lg" type="password" name="password" id="inputPassword" placeholder="{% trans %}Password{% endtrans %}" autocomplete="off">
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <input type="hidden" name="_target_path" value="{{ path('app_homepage') }}"/>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">{% trans %}Login{% endtrans %}</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - PAL Calculator Übersicht{% endblock %}
+
+{% block body %}
+
+
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">PAL Calculator Übersicht</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"></h5>
+                            <b><a href="{{ path('pal_new') }}" class="align-middle">Neuer Eintrag</a></b>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Schlaf</th>
+                                    <th>Liegend</th>
+                                    <th>Sitzend</th>
+                                    <th>Gehend</th>
+                                    <th>Stehend</th>
+                                    <th>Sport</th>
+                                    <th>Timestamp</th>
+                                    <th>PAL-Wert</th>
+                                    <th>Aktionen</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for pal in pals %}
+                                    <tr>
+                                        <td>{{ pal.schlaf }}</td>
+                                        <td>{{ pal.liegend }}</td>
+                                        <td>{{ pal.sitzend }}</td>
+                                        <td>{{ pal.gehend }}</td>
+                                        <td>{{ pal.stehend }}</td>
+                                        <td>{{ pal.sport }}</td>
+                                        <td>{{ pal.timestamp ? pal.timestamp|date('d.m.Y H:i:s') : '' }}</td>
+                                        <td>{{ pal.value|number_format(2) }}</td>
+                                        <td>
+                                            <div class="position-relative">
+                                                <a title="show" href="{{ path('pal_show', {'id': pal.id}) }}"><i class="align-middle" data-feather="search"></i></a>
+                                                <a title="edit" href="{{ path('pal_edit', {'id': pal.id}) }}"><i class="align-middle" data-feather="edit" ></i></a>
+                                                <a title="delete" href="{{ path('pal_delete', {'id': pal.id}) }}"><i class="align-middle" data-feather="delete" ></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">Keine Einträge gefunden</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+    {% block js %}
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Responsive
+            $("#datatables-reponsive").DataTable({
+              responsive: true,
+              order: [[ 6, "desc" ]]
+            });
+          });
+        </script>
+
+    {% endblock %}
+

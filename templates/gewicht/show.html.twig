@@ -1,0 +1,50 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Gewicht anzeigen{% endblock %}
+
+{% block body %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">Gewicht anzeigen</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Gewicht</th>
+                                    <th>Körperfett %</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ gewicht.gewicht }} kg</td>
+                                        <td>{{ gewicht.bf }}%</td>
+                                        <td>{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y H:i:s') : '' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{ path('gewicht_index') }}">Zurück zur Übersicht</a> -
+
+                            <a href="{{ path('gewicht_edit', {'id': gewicht.id}) }}">Bearbeiten</a>
+
+                            {{ include('gewicht/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+

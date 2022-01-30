@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="ToolKit">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="{{ asset('img/icons/icon-48x48.png') }}" />
+
+    <title>{% block title %}ToolKit{% endblock %}</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link class="stylesheet" href="{{ asset('/css/light.css') }}" rel="stylesheet">
+
+    <style>
+        body {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-content js-simplebar">
+            <a class="sidebar-brand" href="{{ path('app_homepage')}}">
+                <span class="align-middle">ToolKit</span>
+            </a>
+
+            <ul class="sidebar-nav">
+                <li class="sidebar-header">
+                    Functions
+                </li>
+
+                <li class="sidebar-item {% if app.request.attributes.get('_route') == 'app_homepage' %}active{% endif %}">
+                    <a class="sidebar-link" href="{{ path('app_homepage')}}">
+                        <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a data-target="#pal" class="sidebar-link ">
+                        <i class="align-middle" data-feather="anchor"></i> <span class="align-middle">PAL</span>
+                    </a>
+                    <ul id="pal" class="sidebar-dropdown list-unstyled " data-parent="#sidebar">
+                        <li class="sidebar-item {% if app.request.attributes.get('_route') == 'pal_index' %}active{% endif %}"><a class="sidebar-link" href="{{ path('pal_index') }}">Übersicht</a></li>
+                        <li class="sidebar-item {% if app.request.attributes.get('_route') == 'pal_new' %}active{% endif %}"><a class="sidebar-link" href="{{ path('pal_new') }}">Erstellen</a></li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a data-target="#gewicht" class="sidebar-link ">
+                        <i class="align-middle" data-feather="crosshair"></i> <span class="align-middle">Gewicht</span>
+                    </a>
+                    <ul id="gewicht" class="sidebar-dropdown list-unstyled " data-parent="#sidebar">
+                        <li class="sidebar-item {% if app.request.attributes.get('_route') == 'gewicht_index' %}active{% endif %}"><a class="sidebar-link" href="{{ path('gewicht_index') }}">Übersicht</a></li>
+                        <li class="sidebar-item {% if app.request.attributes.get('_route') == 'gewicht_new' %}active{% endif %}"><a class="sidebar-link" href="{{ path('gewicht_new') }}">Erstellen</a></li>
+                    </ul>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </nav>
+    <div class="main">
+        <nav class="navbar navbar-expand navbar-light navbar-bg">
+            <a class="sidebar-toggle d-flex">
+                <i class="hamburger align-self-center"></i>
+            </a>
+
+
+            <div class="navbar-collapse collapse">
+            <ul class="navbar-nav navbar-align">
+                <li class="nav-item dropdown">
+                    <a title="Logout" class="nav-icon" href="{{ path('app_logout') }}" >
+                        <div class="position-relative">
+                            <i class="align-middle" data-feather="log-out" ></i>
+
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+{% block body %}{% endblock %}
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row text-muted">
+                <div class="col-6 text-left">
+                    <p class="mb-0">
+                        <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
+                    </p>
+                </div>
+                <div class="col-6 text-right">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="text-muted" href="#">Support</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-muted" href="#">Help Center</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-muted" href="#">Privacy</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="text-muted" href="#">Terms</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</div>
+{% block js %}{% endblock %}
+</body>
+</html>

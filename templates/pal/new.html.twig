@@ -1,0 +1,59 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - PAL Calculator New{% endblock %}
+
+{% block body %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">PAL Calculator New</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">PAL neu berechnen</h5>
+                            <h6 class="card-subtitle text-muted">
+                                Die Anzahl aller Werte muss <b>24</b> betragen.</h6>
+                            <span>
+                                <u>Beispiel:</u><br />
+                                Schlafen: 7<br />
+                                Liegen oder ruhig sitzen: 2<br />
+                                Sitzende Tätigkeit: 9<br />
+                                Sitzen und ab und zu aufstehen: 3<br />
+                                Überwiegend gehend und stehend: 2<br />
+                                Harte körperliche Arbeit oder Sport: 1<br />
+                            </span>
+
+                        </div>
+                        <div class="card-body">
+                            {{ include('pal/_form.html.twig', {'button_label': 'Erstellen'}) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+    {% block js %}
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Responsive
+            $("#datatables-reponsive").DataTable({
+              responsive: true
+            });
+          });
+        </script>
+
+    {% endblock %}
+
+
+

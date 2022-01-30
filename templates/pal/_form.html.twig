@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.schlaf, {'label': 'Schlafen'}) }}
+    {{ form_row(form.liegend, {'label': 'Liegen oder ruhig sitzen'}) }}
+    {{ form_row(form.sitzend, {'label': 'Sitzende Tätigkeit'}) }}
+    {{ form_row(form.gehend, {'label': 'Sitzen und manchmal gehen'}) }}
+    {{ form_row(form.stehend, {'label': 'Überwiegend stehend und gehend'}) }}
+    {{ form_row(form.sport, {'label': 'Harte Arbeit oder Sport'}) }}
+<br>
+<button class="btn btn-success">{{ button_label }}</button>
+{{ form_end(form) }}

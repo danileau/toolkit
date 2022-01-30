@@ -1,0 +1,59 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - PAL anzeigen{% endblock %}
+
+{% block body %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">PAL-Eintrag anzeigen</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>PAL Gesamt</th>
+                                    <th>Schlaf</th>
+                                    <th>Liegend</th>
+                                    <th>Sitzend</th>
+                                    <th>Gehend</th>
+                                    <th>Stehend</th>
+                                    <th>Sport</th>
+                                    <th>Timestamp</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><b>{{ pal.value|number_format(2)}}</b></td>
+                                    <td>{{ pal.schlaf }}h</td>
+                                    <td>{{ pal.liegend }}h</td>
+                                    <td>{{ pal.sitzend }}h</td>
+                                    <td>{{ pal.gehend }}h</td>
+                                    <td>{{ pal.stehend }}h</td>
+                                    <td>{{ pal.sport }}h</td>
+                                    <td>{{ pal.timestamp ? pal.timestamp|date('d.m.Y H:i:s') : '' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{ path('pal_index') }}">Zurück zur Übersicht</a> -
+
+                            <a href="{{ path('pal_edit', {'id': pal.id}) }}">Bearbeiten</a>
+
+                            {{ include('pal/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}

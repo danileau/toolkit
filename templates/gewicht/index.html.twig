@@ -1,0 +1,74 @@
+
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Gewicht Übersicht{% endblock %}
+
+{% block body %}
+
+
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">Gewicht Übersicht</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"></h5>
+                            <b><a href="{{ path('gewicht_new') }}" class="align-middle">Neuer Eintrag</a></b>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Gewicht</th>
+                                    <th>Timestamp</th>
+                                    <th>Körperfettanteil</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for gewicht in gewichts %}
+                                    <tr>
+                                        <td>{{ gewicht.gewicht }} kg</td>
+                                        <td>{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y H:i:s') : '' }}</td>
+                                        <td>{% if gewicht.bf is empty %} - {% else %}{{ gewicht.bf }}%{% endif %}</td>
+                                        <td>
+                                            <a href="{{ path('gewicht_show', {'id': gewicht.id}) }}">Anzeigen</a> -
+                                            <a href="{{ path('gewicht_edit', {'id': gewicht.id}) }}">Bearbeiten</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">Keine Einträge gefunden</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    {% endblock %}
+    {% block js %}
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Responsive
+            $("#datatables-reponsive").DataTable({
+              responsive: true,
+              order: [[ 1, "desc" ]]
+            });
+          });
+        </script>
+
+    {% endblock %}
