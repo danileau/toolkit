@@ -37,8 +37,11 @@
                                         <td>{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y H:i:s') : '' }}</td>
                                         <td>{% if gewicht.bf is empty %} - {% else %}{{ gewicht.bf }}%{% endif %}</td>
                                         <td>
-                                            <a href="{{ path('gewicht_show', {'id': gewicht.id}) }}">Anzeigen</a> -
-                                            <a href="{{ path('gewicht_edit', {'id': gewicht.id}) }}">Bearbeiten</a>
+                                            <div class="position-relative">
+                                                <a title="show" href="{{ path('gewicht_show', {'id': gewicht.id}) }}"><i class="align-middle" data-feather="search"></i></a>
+                                                <a title="edit" href="{{ path('gewicht_edit', {'id': gewicht.id}) }}"><i class="align-middle" data-feather="edit" ></i></a>
+                                                <a title="delete" href="{{ path('gewicht_delete', {'id': gewicht.id}) }}"><i class="align-middle" data-feather="trash-2" ></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                 {% else %}
