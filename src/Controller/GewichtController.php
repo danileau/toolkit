@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -22,10 +23,10 @@ class GewichtController extends AbstractController
     /**
      * @Route("/", name="gewicht_index", methods={"GET"})
      */
-    public function index(GewichtRepository $gewichtRepository): Response
+    public function index(GewichtRepository $gewichtRepository, UserInterface $user): Response
     {
         return $this->render('gewicht/index.html.twig', [
-            'gewichts' => $gewichtRepository->findAll(),
+            'gewichts' => $gewichtRepository->findAllFromUser($user->getId()),
         ]);
     }
 
@@ -61,6 +62,10 @@ class GewichtController extends AbstractController
      */
     public function show(Gewicht $gewicht): Response
     {
+        $user = $this->getUser();
+        if ($user->getId() != $gewicht->getUser()->getId()) {
+            throw new AccessDeniedException('Zugriff verweigert');
+        }
         return $this->render('gewicht/show.html.twig', [
             'gewicht' => $gewicht,
         ]);
@@ -71,6 +76,10 @@ class GewichtController extends AbstractController
      */
     public function edit(Request $request, Gewicht $gewicht, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if ($user->getId() != $gewicht->getUser()->getId()) {
+            throw new AccessDeniedException('Zugriff verweigert');
+        }
         $form = $this->createForm(GewichtType::class, $gewicht);
         $form->handleRequest($request);
 
@@ -91,6 +100,10 @@ class GewichtController extends AbstractController
      */
     public function delete(Request $request, Gewicht $gewicht, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if ($user->getId() != $gewicht->getUser()->getId()) {
+            throw new AccessDeniedException('Zugriff verweigert');
+        }
         if ($this->isCsrfTokenValid('delete'.$gewicht->getId(), $request->request->get('_token'))) {
             $entityManager->remove($gewicht);
             $entityManager->flush();

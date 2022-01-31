@@ -19,6 +19,14 @@ class PALRepository extends ServiceEntityRepository
         parent::__construct($registry, PAL::class);
     }
 
+    /**
+     * @return PAL[] Returns all PAL's ordered by the newest Timestamp
+     */
+    public function findAllFromUser($id)
+    {
+        return $this->findBy(array('user_id' => $id), array('timestamp' => 'DESC'));
+    }
+
     public function getLastPAL($id){
         return $this->createQueryBuilder('p')
             ->select('p.value')

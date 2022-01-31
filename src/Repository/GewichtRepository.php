@@ -54,7 +54,7 @@ class GewichtRepository extends ServiceEntityRepository
             ->select('g.gewicht')
             ->where('g.user = :user')
             ->orderBy('g.timestamp', 'DESC')
-            ->setFirstResult(1)
+
             ->setMaxResults(7)
             ->setParameter('user', $id)
             ->getQuery()

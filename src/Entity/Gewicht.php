@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Gewicht
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -22,6 +23,10 @@ class Gewicht
      */
     private $timestamp;
 
+    public function __construct()
+    {
+        $this->timestamp = new \DateTime();
+    }
     /**
      * @ORM\Column(type="float")
      */

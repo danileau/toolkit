@@ -36,12 +36,11 @@
                                                 <h5 class="card-title mb-4">PAL <i class="align-middle" data-feather="sun"></i></h5>
                                                 <h1 class="mt-1 mb-3">{{pal|number_format(3)}}</h1>
                                                 <div class="mb-1">
-                                                    {% if pal_percent < 0 %}
-                                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> {{pal_percent|number_format(2)}}% </span>
+                                                    {% if pal == 0 %}
+                                                    <span class="text-muted">Min. 1 Eintrag benötigt</span>
                                                     {% else %}
-                                                        <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> +{{pal_percent|number_format(2)}}% </span>
+                                                    <span class="text-muted">Dein aktueller PAL-Wert</span>
                                                     {% endif %}
-                                                    <span class="text-muted">Since last Value</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -58,12 +57,16 @@
                                                 <h5 class="card-title mb-4">Gleitendes Gewicht <i class="align-middle" data-feather="activity"></i></h5>
                                                 <h1 class="mt-1 mb-3">{{ gewicht_avg_7|number_format(2)}} kg</h1>
                                                 <div class="mb-1">
-                                                    {% if gewicht_percent < 0 %}
-                                                        <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> {{gewicht_percent|number_format(2)}}% </span>
+                                                    {% if gewicht_avg_7 == 0 %}
+                                                        <span class="text-muted">Min. 7 Einträge benötigt</span>
                                                     {% else %}
-                                                        <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> +{{gewicht_percent|number_format(2)}}% </span>
+                                                        {% if gewicht_percent < 0 %}
+                                                            <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> {{gewicht_percent|number_format(2)}}% </span>
+                                                        {% else %}
+                                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> +{{gewicht_percent|number_format(2)}}% </span>
+                                                        {% endif %}
+                                                        <span class="text-muted">Seit dem letzten Eintrag</span>
                                                     {% endif %}
-                                                    <span class="text-muted">Since last Value</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +83,15 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title mb-4 align-middle">Defizit <i class="align-middle" data-feather="arrow-down"></i></h5>
                                                     <h1 class="mt-1 mb-3 text-danger">{{defizit|number_format}} kcal</h1>
-
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title mb-4">Aktuelles Gewicht <i class="align-middle" data-feather="activity"></i></h5>
+                                                    <h1 class="mt-1 mb-3">{{ current_gewicht|number_format(2)}} kg</h1>
+                                                    <div class="mb-1">
+                                                        <span class="text-muted">Dein aktuelles Gewicht</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

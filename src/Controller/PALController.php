@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
@@ -23,10 +24,10 @@ class PALController extends AbstractController
     /**
      * @Route("/", name="pal_index", methods={"GET"})
      */
-    public function index(PALRepository $pALRepository): Response
+    public function index(PALRepository $pALRepository, UserInterface $user): Response
     {
         return $this->render('pal/index.html.twig', [
-            'pals' => $pALRepository->findAll(),
+            'pals' => $pALRepository->findAllFromUser($user->getId()),
         ]);
     }
 
@@ -67,6 +68,10 @@ class PALController extends AbstractController
      */
     public function show(PAL $pAL): Response
     {
+        $user = $this->getUser();
+        if ($user->getId() != $pAL->getUserId()->getId()) {
+            throw new AccessDeniedException('Zugriff verweigert');
+        }
         return $this->render('pal/show.html.twig', [
             'pal' => $pAL,
         ]);
@@ -77,6 +82,10 @@ class PALController extends AbstractController
      */
     public function edit(Request $request, PAL $pAL, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if ($user->getId() != $pAL->getUserId()->getId()) {
+            throw new AccessDeniedException('Zugriff verweigert');
+        }
         $form = $this->createForm(PALType::class, $pAL);
         $form->handleRequest($request);
 
@@ -98,6 +107,10 @@ class PALController extends AbstractController
      */
     public function delete(Request $request, PAL $pAL, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if ($user->getId() != $pAL->getUserId()->getId()) {
+            throw new AccessDeniedException('Zugriff verweigert');
+        }
         if ($this->isCsrfTokenValid('delete'.$pAL->getId(), $request->request->get('_token'))) {
             $entityManager->remove($pAL);
             $entityManager->flush();
