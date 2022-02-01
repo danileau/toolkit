@@ -33,7 +33,7 @@ class GewichtController extends AbstractController
     /**
      * @Route("/new", name="gewicht_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager, UserInterface $user): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserInterface $user, GewichtRepository $gewichtRepository): Response
     {
         $gewicht = new Gewicht();
         $form = $this->createForm(GewichtType::class, $gewicht);
@@ -43,8 +43,13 @@ class GewichtController extends AbstractController
             /** @var Gewicht $gewichtvalue */
             $gewichtvalue = $form->getData();
             $gewichtvalue->setTimestamp($gewichtvalue->getTimestamp());
+
             $gewichtvalue->setUser($user);
 
+            if($gewichtvalue->getCalculate() == true){
+               $gewichtRepository->setAllCalulculateFalse($user->getId());
+            }
+            $gewichtvalue->setCalculate($gewichtvalue->getCalculate());
             $entityManager->persist($gewicht);
             $entityManager->flush();
 
@@ -74,7 +79,7 @@ class GewichtController extends AbstractController
     /**
      * @Route("/{id}/edit", name="gewicht_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Gewicht $gewicht, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Gewicht $gewicht, EntityManagerInterface $entityManager, GewichtRepository $gewichtRepository, UserInterface $user): Response
     {
         $user = $this->getUser();
         if ($user->getId() != $gewicht->getUser()->getId()) {
@@ -84,6 +89,11 @@ class GewichtController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Gewicht $gewichtvalue */
+            $gewichtvalue = $form->getData();
+            if($gewichtvalue->getCalculate() == true){
+                $gewichtRepository->setAllCalulculateFalse($user->getId());
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('gewicht_index', [], Response::HTTP_SEE_OTHER);

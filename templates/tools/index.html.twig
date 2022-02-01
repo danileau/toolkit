@@ -29,6 +29,13 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Aufbau <i class="align-middle" data-feather="arrow-up"></i></h5>
                                                 <h1 class="mt-1 mb-3 text-success">{{aufbau|number_format}} kcal</h1>
+                                                <div class="mb-1">
+                                                    {% if pal == 0 %}
+                                                        <span class="text-muted">PAL benötigt</span>
+                                                    {% elseif gewichtkcal == 0%}
+                                                        <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card">
@@ -50,6 +57,13 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Erhalt <i class="align-middle" data-feather="minus"></i></h5>
                                                 <h1 class="mt-1 mb-3 text-secondary">{{erhalt|number_format}} kcal</h1>
+                                                <div class="mb-1">
+                                                    {% if pal == 0 %}
+                                                        <span class="text-muted">PAL benötigt</span>
+                                                    {% elseif gewichtkcal == 0%}
+                                                        <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="card">
@@ -83,6 +97,13 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title mb-4 align-middle">Defizit <i class="align-middle" data-feather="arrow-down"></i></h5>
                                                     <h1 class="mt-1 mb-3 text-danger">{{defizit|number_format}} kcal</h1>
+                                                    <div class="mb-1">
+                                                        {% if pal == 0 %}
+                                                            <span class="text-muted">PAL benötigt</span>
+                                                        {% elseif gewichtkcal == 0%}
+                                                            <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card">

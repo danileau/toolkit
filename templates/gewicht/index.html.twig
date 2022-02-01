@@ -27,6 +27,7 @@
                                     <th>Gewicht</th>
                                     <th>Timestamp</th>
                                     <th>Körperfettanteil</th>
+                                    <th>Berechnung</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -36,6 +37,7 @@
                                         <td>{{ gewicht.gewicht }} kg</td>
                                         <td>{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y H:i:s') : '' }}</td>
                                         <td>{% if gewicht.bf is empty %} - {% else %}{{ gewicht.bf }}%{% endif %}</td>
+                                        <td>{% if (gewicht.calculate == 0) or (gewicht.calculate is empty) %} - {% else %} true {% endif %}</td>
                                         <td>
                                             <div class="position-relative">
                                                 <a title="show" href="{{ path('gewicht_show', {'id': gewicht.id}) }}"><i class="align-middle" data-feather="search"></i></a>

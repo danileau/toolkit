@@ -42,6 +42,11 @@ class Gewicht
      */
     private $bf;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $calculate;
+
 
     public function getId(): ?int
     {
@@ -92,6 +97,18 @@ class Gewicht
     public function setBf(?float $bf): self
     {
         $this->bf = $bf;
+
+        return $this;
+    }
+
+    public function getCalculate(): ?bool
+    {
+        return $this->calculate;
+    }
+
+    public function setCalculate(?bool $calculate): self
+    {
+        $this->calculate = $calculate;
 
         return $this;
     }

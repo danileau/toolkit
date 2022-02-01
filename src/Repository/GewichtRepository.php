@@ -27,6 +27,21 @@ class GewichtRepository extends ServiceEntityRepository
         return $this->findBy(array('user' => $id), array('timestamp' => 'DESC'));
     }
 
+    /** Überschreibt die calc-werte aller Gewichte des eingeloggten Users und setzt den aktuellen auf true */
+
+    public function setAllCalulculateFalse($user_id){
+
+        $query = $this->createQueryBuilder('')
+            ->update('App\Entity\gewicht', 'g')
+            ->set('g.calculate', 'false')
+            ->where('g.user = :user')
+            ->setParameter('user', $user_id)
+            ->getQuery();
+        $result = $query->execute();
+
+        return $result;
+    }
+
     public function getLastGewicht($id){
         return $this->createQueryBuilder('g')
             ->select('g.gewicht')
@@ -38,6 +53,17 @@ class GewichtRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function getLastGewichtforKcal($id){
+        return $this->createQueryBuilder('g')
+            ->select('g.gewicht')
+            ->where('g.user = :user')
+            ->andWhere('g.calculate = true')
+            ->orderBy('g.timestamp', 'DESC')
+            ->setMaxResults(1)
+            ->setParameter('user', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     public function getLastSevenGewicht($id){
         return $this->createQueryBuilder('g')
             ->select('g.gewicht')

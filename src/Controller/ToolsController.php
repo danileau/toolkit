@@ -29,7 +29,7 @@ class ToolsController extends AbstractController
 
         switch(true){
             case $count_all_gewicht == 0:
-
+                $gewichtkcal = 0;
                 $currentGewicht = 0;
                 $lastSevenDaysGewicht = 0;
                 $lastSevenCompGewicht = 0;
@@ -39,6 +39,7 @@ class ToolsController extends AbstractController
                 break;
             case ($count_all_gewicht < 7):
                 $Gewicht = $gewichtRepository->getLastGewicht($user);
+                $gewichtkcal = $gewichtRepository->getLastGewichtforKcal($user);
                 $currentGewicht = $Gewicht["gewicht"];
                 $lastSevenDaysGewicht = 0;
                 $lastSevenCompGewicht = 0;
@@ -47,7 +48,7 @@ class ToolsController extends AbstractController
                 $lastSevenGewicht_percent = 0;
                 break;
             default:
-
+                $gewichtkcal = $gewichtRepository->getLastGewichtforKcal($user);
                 $Gewicht = $gewichtRepository->getLastGewicht($user);
                 $currentGewicht = $Gewicht["gewicht"];
                 $lastSevenDaysGewicht = $gewichtRepository->getLastSevenGewicht($user);
@@ -62,7 +63,6 @@ class ToolsController extends AbstractController
                 $lastSevenGewicht_percent = ($avg_lastSeven - $avg_lastSevenComp) / $avg_lastSeven * 100;
                 break;
         }
-
 
         /**
          * Switch Logic for PAL Values
@@ -117,8 +117,8 @@ class ToolsController extends AbstractController
         $bf_m_MonthJSON = json_encode($bf_m_DiagramMonth);
         $bf_m_ValueJSON = json_encode($bf_m_DiagramCount);
 
-        if (isset($Gewicht['gewicht']) && isset($last_PAL['value'])) {
-            $grundumsatz = 1 * $Gewicht['gewicht'] * 24;
+        if (isset($gewichtkcal['gewicht']) && isset($last_PAL['value'])) {
+            $grundumsatz = 1 * $gewichtkcal['gewicht'] * 24;
             $gesamtEnergieBedarf = $grundumsatz * $last_PAL['value'];
             if ($gesamtEnergieBedarf != 0) {
                 $aufbau = $gesamtEnergieBedarf + 300;
@@ -138,6 +138,7 @@ class ToolsController extends AbstractController
             'gewicht_avg_7' => $avg_lastSeven,
             'gewicht_percent' => $lastSevenGewicht_percent,
             'pal' => $last_PAL['value'],
+            'gewichtkcal' => $gewichtkcal,
             'aufbau' => $aufbau,
             'erhalt' => $gesamtEnergieBedarf,
             'defizit' => $defizit,
