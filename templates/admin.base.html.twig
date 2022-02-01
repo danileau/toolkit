@@ -44,7 +44,7 @@
                     <a data-target="#pal" class="sidebar-link ">
                         <i class="align-middle" data-feather="anchor"></i> <span class="align-middle">PAL</span>
                     </a>
-                    <ul id="pal" class="sidebar-dropdown list-unstyled " data-parent="#sidebar">
+                    <ul id="pal" class="sidebar-dropdown list-unstyled " data-parent="#pal">
                         <li class="sidebar-item {% if app.request.attributes.get('_route') == 'pal_index' %}active{% endif %}"><a class="sidebar-link" href="{{ path('pal_index') }}">Übersicht</a></li>
                         <li class="sidebar-item {% if app.request.attributes.get('_route') == 'pal_new' %}active{% endif %}"><a class="sidebar-link" href="{{ path('pal_new') }}">Erstellen</a></li>
                     </ul>
@@ -54,11 +54,22 @@
                     <a data-target="#gewicht" class="sidebar-link ">
                         <i class="align-middle" data-feather="crosshair"></i> <span class="align-middle">Gewicht</span>
                     </a>
-                    <ul id="gewicht" class="sidebar-dropdown list-unstyled " data-parent="#sidebar">
+                    <ul id="gewicht" class="sidebar-dropdown list-unstyled " data-parent="#gewicht">
                         <li class="sidebar-item {% if app.request.attributes.get('_route') == 'gewicht_index' %}active{% endif %}"><a class="sidebar-link" href="{{ path('gewicht_index') }}">Übersicht</a></li>
                         <li class="sidebar-item {% if app.request.attributes.get('_route') == 'gewicht_new' %}active{% endif %}"><a class="sidebar-link" href="{{ path('gewicht_new') }}">Erstellen</a></li>
                     </ul>
                 </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="sidebar-item">
+                        <a data-target="#users" class="sidebar-link ">
+                            <i class="align-middle" data-feather="users"></i> <span class="align-middle">Users</span>
+                        </a>
+                        <ul id="users" class="sidebar-dropdown list-unstyled " data-parent="#users">
+                            <li class="sidebar-item {% if app.request.attributes.get('_route') == 'user-index' %}active{% endif %}"><a class="sidebar-link" href="{{ path('user_index') }}">Übersicht</a></li>
+
+                        </ul>
+                    </li>
+                {% endif %}
 
 
             </ul>

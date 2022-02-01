@@ -1,0 +1,78 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Users Übersicht{% endblock %}
+
+{% block body %}
+<main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">User Übersicht</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"></h5>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Rolle</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            {% if user.roles.0 == 'ROLE_ADMIN' %}
+                                                <p class="text-danger">Administrator</p>
+                                            {% else %}
+                                                <p class="text-success">Benutzer</p>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="position-relative">
+                                                <a title="show" href="{{ path('user_show', {'id': user.id}) }}"><i class="align-middle" data-feather="search"></i></a>
+                                                <a title="delete" href="{{ path('user_delete', {'id': user.id}) }}"><i class="align-middle" data-feather="trash-2" ></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">Keine User gefunden</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+    {% block js %}
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Responsive
+            $("#datatables-reponsive").DataTable({
+              responsive: true,
+              order: [[ 0, "asc" ]]
+            });
+          });
+        </script>
+
+{% endblock %}
