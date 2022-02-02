@@ -21,10 +21,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xl-6 col-xxl-6 d-flex">
+                       <!-- <div class="col-12 col-md-6 col-lg-4">-->
                             <div class="w-100">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Aufbau <i class="align-middle" data-feather="arrow-up"></i></h5>
@@ -51,8 +51,47 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4 text-danger" data-toggle="modal" data-target="#proteinInfo">Proteine <i class="align-middle" data-feather="info"></i></h5>
+                                                <h4 class="text-decoration-underline">Aufbau</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{protein_aufbau_kcal|number_format}} kcal / {{ protein_aufbau_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Erhalt</h4>
+                                                <h4 class="mt-1 mb-3 text-secondary">{{protein_erhalt_kcal|number_format}} kcal / {{ protein_erhalt_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Defizit</h4>
+                                                <h4 class="mt-1 mb-3 text-danger">{{protein_defizit_kcal|number_format}} kcal / {{ protein_defizit_gramm|number_format }} g</h4>
+
+                                                <div class="modal fade" id="proteinInfo" tabindex="-1" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Proteinverteilung berechnen</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body m-3">
+                                                                <p class="mb-0">Proteine:<br/>
+                                                                    Gewicht * 2 = Gramm Protein * 4kcal/g = Kalorienanteil Proteine</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-1">
+                                                    {% if pal == 0 %}
+                                                        <span class="text-muted">PAL benötigt</span>
+                                                    {% elseif gewichtkcal == 0%}
+                                                        <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
+
+                                    <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Erhalt <i class="align-middle" data-feather="minus"></i></h5>
@@ -84,42 +123,113 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                            <div class="col-xl-6 col-xxl-6 d-flex">
-                                <div class="w-100">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title mb-4 align-middle">Defizit <i class="align-middle" data-feather="arrow-down"></i></h5>
-                                                    <h1 class="mt-1 mb-3 text-danger">{{defizit|number_format}} kcal</h1>
-                                                    <div class="mb-1">
-                                                        {% if pal == 0 %}
-                                                            <span class="text-muted">PAL benötigt</span>
-                                                        {% elseif gewichtkcal == 0%}
-                                                            <span class="text-muted">Gewicht zum berechnen benötigt</span>
-                                                        {% endif %}
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4 text-warning" data-toggle="modal" data-target="#fettInfo">Fette <i class="align-middle" data-feather="info"></i></h5>
+                                                <h4 class="text-decoration-underline">Aufbau</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{fett_aufbau_kcal|number_format}} kcal / {{ fett_aufbau_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Erhalt</h4>
+                                                <h4 class="mt-1 mb-3 text-secondary">{{fett_erhalt_kcal|number_format}} kcal / {{ fett_erhalt_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Defizit</h4>
+                                                <h4 class="mt-1 mb-3 text-danger">{{fett_defizit_kcal|number_format}} kcal / {{ fett_defizit_gramm|number_format }} g</h4>
+                                                <div class="modal fade" id="fettInfo" tabindex="-1" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Proteinverteilung berechnen</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body m-3">
+                                                                <p class="mb-0">Fette:<br/>
+                                                                    Gesamtenergiebedarf * 0.25 = Kalorienanteil Fette : 9kcal/g = Gramm Fette</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title mb-4">Aktuelles Gewicht <i class="align-middle" data-feather="user"></i></h5>
-                                                    <h1 class="mt-1 mb-3">{{ current_gewicht|number_format(2)}} kg</h1>
-                                                    <div class="mb-1">
-                                                        <span class="text-muted">Dein aktuelles Gewicht</span>
-                                                    </div>
+                                                <div class="mb-1">
+                                                    {% if pal == 0 %}
+                                                        <span class="text-muted">PAL benötigt</span>
+                                                    {% elseif gewichtkcal == 0%}
+                                                        <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4 align-middle">Defizit <i class="align-middle" data-feather="arrow-down"></i></h5>
+                                                <h1 class="mt-1 mb-3 text-danger">{{defizit|number_format}} kcal</h1>
+                                                <div class="mb-1">
+                                                    {% if pal == 0 %}
+                                                        <span class="text-muted">PAL benötigt</span>
+                                                    {% elseif gewichtkcal == 0%}
+                                                        <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Aktuelles Gewicht <i class="align-middle" data-feather="user"></i></h5>
+                                                <h1 class="mt-1 mb-3">{{ current_gewicht|number_format(2)}} kg</h1>
+                                                <div class="mb-1">
+                                                    <span class="text-muted">Dein aktuelles Gewicht</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4 text-success" data-toggle="modal" data-target="#carbsInfo">Kohlenhydrate <i class="align-middle" data-feather="info"></i></h5>
+                                                <h4 class="text-decoration-underline">Aufbau</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{carbs_aufbau_kcal|number_format}} kcal / {{ carbs_defizit_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Erhalt</h4>
+                                                <h4 class="mt-1 mb-3 text-secondary">{{carbs_erhalt_kcal|number_format}} kcal / {{ carbs_erhalt_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Defizit</h4>
+                                                <h4 class="mt-1 mb-3 text-danger">{{carbs_defizit_kcal|number_format}} kcal / {{ carbs_defizit_gramm|number_format }} g</h4>
 
+                                                <div class="modal fade" id="carbsInfo" tabindex="-1" aria-hidden="true" style="display: none;">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Kohlehydratverteilung berechnen</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body m-3">
+                                                                <p class="mb-0">Kohlenhydrate:<br/>
+                                                                    Gesamtenergiebedarf - Kalorienanteil Proteine - Kalorienanteil Fette = Kalorienanteil Kohlenhydrate : 4kcal/g = Gramm Kohlenhydrate</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-1">
+                                                    {% if pal == 0 %}
+                                                        <span class="text-muted">PAL benötigt</span>
+                                                    {% elseif gewichtkcal == 0%}
+                                                        <span class="text-muted">Gewicht zum berechnen benötigt</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+
                             </div>
+
+
                     </div>
 
                     <div class="row">
@@ -356,4 +466,32 @@
         });
       });
     </script>
+    <style>
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+    </style>
 {% endblock %}

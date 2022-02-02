@@ -132,6 +132,29 @@ class ToolsController extends AbstractController
             $defizit = 0;
             $gesamtEnergieBedarf = 0;
         }
+
+        // Makronährstoffberechnung
+        // Protein im Aufbau * 2 - Protein im Defizit/Erhalt 2.3 - Fett Gesamt * 0.25 - Kohlenhydrate Rest
+        $protein_aufbau_faktor = 2;
+        $protein_defizit_faktor = 2.3;
+        $protein_aufbau_gramm = $gewichtkcal["gewicht"] * $protein_aufbau_faktor;
+        $protein_aufbau_kcal = $protein_aufbau_gramm * 4;
+        $protein_defizit_gramm = $gewichtkcal["gewicht"] * $protein_defizit_faktor;
+        $protein_defizit_kcal = $protein_defizit_gramm * 4;
+        $fettfaktor = 0.25;
+        $fett_aufbau_kcal = $aufbau * $fettfaktor;
+        $fett_aufbau_gramm = $fett_aufbau_kcal / 9;
+        $fett_erhalt_kcal = $gesamtEnergieBedarf * $fettfaktor;
+        $fett_erhalt_gramm = $fett_erhalt_kcal / 9;
+        $fett_defizit_kcal = $defizit * $fettfaktor;
+        $fett_defizit_gramm = $fett_defizit_kcal / 9;
+        $carbs_aufbau_kcal = $aufbau - $protein_aufbau_kcal - $fett_aufbau_kcal;
+        $carbs_aufbau_gramm = $carbs_aufbau_kcal / 4;
+        $carbs_erhalt_kcal = $gesamtEnergieBedarf - $protein_defizit_kcal - $fett_erhalt_kcal;
+        $carbs_erhalt_gramm = $carbs_erhalt_kcal / 4;
+        $carbs_defizit_kcal = $defizit - $protein_defizit_kcal - $fett_defizit_kcal;
+        $carbs_defizit_gramm = $carbs_defizit_kcal / 4;
+
         return $this->render('tools/index.html.twig', [
             'controller_name' => 'ToolsController',
             'current_gewicht' => $currentGewicht,
@@ -142,6 +165,24 @@ class ToolsController extends AbstractController
             'aufbau' => $aufbau,
             'erhalt' => $gesamtEnergieBedarf,
             'defizit' => $defizit,
+            'fett_aufbau_kcal' => $fett_aufbau_kcal,
+            'fett_aufbau_gramm' => $fett_aufbau_kcal,
+            'fett_erhalt_kcal' => $fett_erhalt_kcal,
+            'fett_erhalt_gramm' => $fett_erhalt_kcal,
+            'fett_defizit_kcal' => $fett_defizit_kcal,
+            'fett_defizit_gramm' => $fett_defizit_kcal,
+            'protein_aufbau_kcal' => $protein_aufbau_kcal,
+            'protein_aufbau_gramm' => $protein_aufbau_gramm,
+            'protein_erhalt_kcal' => $protein_defizit_kcal,
+            'protein_erhalt_gramm' => $protein_defizit_gramm,
+            'protein_defizit_kcal' => $protein_defizit_kcal,
+            'protein_defizit_gramm' => $protein_defizit_gramm,
+            'carbs_aufbau_kcal' => $carbs_aufbau_kcal,
+            'carbs_aufbau_gramm' => $carbs_aufbau_gramm,
+            'carbs_erhalt_kcal' => $carbs_erhalt_kcal,
+            'carbs_erhalt_gramm' => $carbs_erhalt_gramm,
+            'carbs_defizit_kcal' => $carbs_defizit_kcal,
+            'carbs_defizit_gramm' => $carbs_defizit_gramm,
             'gewicht_m_month' => $gewicht_m_MonthJSON,
             'gewicht_data' => $gewichtValueJSON,
             'gewicht_m_data' => $gewicht_m_ValueJSON,
