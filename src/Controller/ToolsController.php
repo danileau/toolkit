@@ -141,17 +141,24 @@ class ToolsController extends AbstractController
         $protein_aufbau_kcal = $protein_aufbau_gramm * 4;
         $protein_defizit_gramm = $gewichtkcal["gewicht"] * $protein_defizit_faktor;
         $protein_defizit_kcal = $protein_defizit_gramm * 4;
+
         $fettfaktor = 0.25;
+        $fett_refeed_faktor = 0.09;
         $fett_aufbau_kcal = $aufbau * $fettfaktor;
         $fett_aufbau_gramm = $fett_aufbau_kcal / 9;
+        $fett_refeed_erhalt_kcal = $gesamtEnergieBedarf * $fett_refeed_faktor;
+        $fett_refeed_erhalt_gramm = $fett_refeed_erhalt_kcal / 9;
         $fett_erhalt_kcal = $gesamtEnergieBedarf * $fettfaktor;
         $fett_erhalt_gramm = $fett_erhalt_kcal / 9;
+
         $fett_defizit_kcal = $defizit * $fettfaktor;
         $fett_defizit_gramm = $fett_defizit_kcal / 9;
         $carbs_aufbau_kcal = $aufbau - $protein_aufbau_kcal - $fett_aufbau_kcal;
         $carbs_aufbau_gramm = $carbs_aufbau_kcal / 4;
         $carbs_erhalt_kcal = $gesamtEnergieBedarf - $protein_defizit_kcal - $fett_erhalt_kcal;
         $carbs_erhalt_gramm = $carbs_erhalt_kcal / 4;
+        $carbs_refeed_erhalt_kcal = $gesamtEnergieBedarf - $protein_defizit_kcal - $fett_refeed_erhalt_kcal;
+        $carbs_refeed_erhalt_gramm = $carbs_refeed_erhalt_kcal / 4;
         $carbs_defizit_kcal = $defizit - $protein_defizit_kcal - $fett_defizit_kcal;
         $carbs_defizit_gramm = $carbs_defizit_kcal / 4;
 
@@ -166,11 +173,13 @@ class ToolsController extends AbstractController
             'erhalt' => $gesamtEnergieBedarf,
             'defizit' => $defizit,
             'fett_aufbau_kcal' => $fett_aufbau_kcal,
-            'fett_aufbau_gramm' => $fett_aufbau_kcal,
+            'fett_aufbau_gramm' => $fett_aufbau_gramm,
             'fett_erhalt_kcal' => $fett_erhalt_kcal,
-            'fett_erhalt_gramm' => $fett_erhalt_kcal,
+            'fett_erhalt_gramm' => $fett_erhalt_gramm,
             'fett_defizit_kcal' => $fett_defizit_kcal,
-            'fett_defizit_gramm' => $fett_defizit_kcal,
+            'fett_defizit_gramm' => $fett_defizit_gramm,
+            'fett_refeed_kcal' => $fett_refeed_erhalt_kcal,
+            'fett_refeed_gramm' => $fett_refeed_erhalt_gramm,
             'protein_aufbau_kcal' => $protein_aufbau_kcal,
             'protein_aufbau_gramm' => $protein_aufbau_gramm,
             'protein_erhalt_kcal' => $protein_defizit_kcal,
@@ -183,6 +192,8 @@ class ToolsController extends AbstractController
             'carbs_erhalt_gramm' => $carbs_erhalt_gramm,
             'carbs_defizit_kcal' => $carbs_defizit_kcal,
             'carbs_defizit_gramm' => $carbs_defizit_gramm,
+            'carbs_refeed_kcal' => $carbs_refeed_erhalt_kcal,
+            'carbs_refeed_gramm' => $carbs_refeed_erhalt_gramm,
             'gewicht_m_month' => $gewicht_m_MonthJSON,
             'gewicht_data' => $gewichtValueJSON,
             'gewicht_m_data' => $gewicht_m_ValueJSON,

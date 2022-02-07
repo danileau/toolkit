@@ -19,12 +19,35 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+                        <div class="alert alert-success" role="alert">
                             <div class="alert-message">
-                                Für weitere Informationen klick auf den Info-Button <i class="align-middle" data-feather="info"></i>
+                                Für weitere Informationen klick auf den Info-Button <i class="align-middle" data-feather="info" data-toggle="modal" data-target="#Info"></i>
+                            </div>
+                            <div class="modal fade" id="Info" tabindex="-1" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Grundlegende Informationen</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body m-3">
+                                            <p class="mb-0"><b>Aufbau, Erhalt & Defizit:</b><br/>
+                                                Allgemeine Kalorienanpassungen sind +300 kcal im Aufbau und -300 kcal im Defizit.
+                                            </p><br/>
+                                            <p class="mb-0"><b>Refeed:</b><br/>
+                                                Im <b>ersten</b> Monat eines Kaloriendefizits ist kein Refeedtag nötig - bringt keine Vorteile<br/>
+                                                im <b>zweiten</b> Monat empfiehlt sich 1x pro Woche einen Refeedtag durchzuführen. z.B an einem Samstag<br/>
+                                                Im <b>dritten</b> Monat empfiehlt es sich 2x pro Woche einen Refeedtag durchzuführen. z.B am Mittwoch und Samstag<br/>
+                                                Weitere Infos zum Refeed-Konzept: <a href="https://quantumleapfitness.de/refeed-day" target="_blank">https://quantumleapfitness.de/refeed-day</a>
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,19 +91,25 @@
                                                 <h4 class="mt-1 mb-3 text-secondary">{{protein_erhalt_kcal|number_format}} kcal / {{ protein_erhalt_gramm|number_format }} g</h4>
                                                 <h4 class="text-decoration-underline">Defizit</h4>
                                                 <h4 class="mt-1 mb-3 text-danger">{{protein_defizit_kcal|number_format}} kcal / {{ protein_defizit_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Refeed</h4>
+                                                <h4 class="mt-1 mb-3 text-primary">{{protein_defizit_kcal|number_format}} kcal / {{ protein_defizit_gramm|number_format }} g</h4>
 
                                                 <div class="modal fade" id="proteinInfo" tabindex="-1" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Proteinverteilung berechnen</h5>
+                                                                <h4 class="modal-title">Berechnung der Proteinverteilung</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body m-3">
-                                                                <p class="mb-0">Proteine:<br/>
-                                                                    Gewicht * 2 = Gramm Protein * 4kcal/g = Kalorienanteil Proteine</p>
+                                                                <p class="mb-0"><b>Aufbau:</b><br/>
+                                                                    Gewicht * <b>2</b> = Gramm Protein * 4 kcal/g = Kalorienanteil Proteine
+                                                                </p>
+                                                                <p class="mb-0"><b>Erhalt, Defizit & Refeed:</b><br/>
+                                                                    Gewicht * <b>2.3</b> = Gramm Protein * 4 kcal/g = Kalorienanteil Proteine
+                                                                </p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
@@ -140,18 +169,25 @@
                                                 <h4 class="mt-1 mb-3 text-secondary">{{fett_erhalt_kcal|number_format}} kcal / {{ fett_erhalt_gramm|number_format }} g</h4>
                                                 <h4 class="text-decoration-underline">Defizit</h4>
                                                 <h4 class="mt-1 mb-3 text-danger">{{fett_defizit_kcal|number_format}} kcal / {{ fett_defizit_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Refeed</h4>
+                                                <h4 class="mt-1 mb-3 text-primary">{{fett_refeed_kcal|number_format}} kcal / {{ fett_refeed_gramm|number_format }} g</h4>
+
                                                 <div class="modal fade" id="fettInfo" tabindex="-1" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Proteinverteilung berechnen</h5>
+                                                                <h4 class="modal-title">Berechnen der Fettverteilung</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body m-3">
-                                                                <p class="mb-0">Fette:<br/>
-                                                                    Gesamtenergiebedarf * 0.25 = Kalorienanteil Fette : 9kcal/g = Gramm Fette</p>
+                                                                <p class="mb-0"><b>Aufbau, Erhalt & Defizit:</b><br/>
+                                                                    Gesamtenergiebedarf * 0.25 = Kalorienanteil Fette : 9 kcal/g = Gramm Fette
+                                                                </p>
+                                                                <p class="mb-0"><b>Refeed:</b><br/>
+                                                                    Gesamtenergiebedarf * 0.09 = Kalorienanteil Fette : 9 kcal/g = Gramm Fette
+                                                                </p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
@@ -196,23 +232,24 @@
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4 text-success" data-toggle="modal" data-target="#carbsInfo">Kohlenhydrate <i class="align-middle" data-feather="info"></i></h5>
                                                 <h4 class="text-decoration-underline">Aufbau</h4>
-                                                <h4 class="mt-1 mb-3 text-success">{{carbs_aufbau_kcal|number_format}} kcal / {{ carbs_defizit_gramm|number_format }} g</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{carbs_aufbau_kcal|number_format}} kcal / {{ carbs_aufbau_gramm|number_format }} g</h4>
                                                 <h4 class="text-decoration-underline">Erhalt</h4>
                                                 <h4 class="mt-1 mb-3 text-secondary">{{carbs_erhalt_kcal|number_format}} kcal / {{ carbs_erhalt_gramm|number_format }} g</h4>
                                                 <h4 class="text-decoration-underline">Defizit</h4>
                                                 <h4 class="mt-1 mb-3 text-danger">{{carbs_defizit_kcal|number_format}} kcal / {{ carbs_defizit_gramm|number_format }} g</h4>
-
+                                                <h4 class="text-decoration-underline">Refeed</h4>
+                                                <h4 class="mt-1 mb-3 text-primary">{{carbs_refeed_kcal|number_format}} kcal / {{ carbs_refeed_gramm|number_format }} g</h4>
                                                 <div class="modal fade" id="carbsInfo" tabindex="-1" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Kohlehydratverteilung berechnen</h5>
+                                                                <h4 class="modal-title">Berechnung der Kohlenhydratverteilung</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body m-3">
-                                                                <p class="mb-0">Kohlenhydrate:<br/>
+                                                                <p class="mb-0"><b>Aufbau, Erhalt, Defizit & Refeed:</b><br/>
                                                                     Gesamtenergiebedarf - Kalorienanteil Proteine - Kalorienanteil Fette = Kalorienanteil Kohlenhydrate : 4kcal/g = Gramm Kohlenhydrate</p>
                                                             </div>
                                                             <div class="modal-footer">
