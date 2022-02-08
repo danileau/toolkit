@@ -119,6 +119,7 @@ class ToolsController extends AbstractController
 
         if (isset($gewichtkcal['gewicht']) && isset($last_PAL['value'])) {
             $grundumsatz = 1 * $gewichtkcal['gewicht'] * 24;
+            $gewichtkcal = $gewichtkcal['gewicht'];
             $gesamtEnergieBedarf = $grundumsatz * $last_PAL['value'];
             if ($gesamtEnergieBedarf != 0) {
                 $aufbau = $gesamtEnergieBedarf + 300;
@@ -131,15 +132,17 @@ class ToolsController extends AbstractController
             $aufbau = 0;
             $defizit = 0;
             $gesamtEnergieBedarf = 0;
+            $gewichtkcal = 0;
         }
 
         // Makronährstoffberechnung
         // Protein im Aufbau * 2 - Protein im Defizit/Erhalt 2.3 - Fett Gesamt * 0.25 - Kohlenhydrate Rest
         $protein_aufbau_faktor = 2;
         $protein_defizit_faktor = 2.3;
-        $protein_aufbau_gramm = $gewichtkcal["gewicht"] * $protein_aufbau_faktor;
+
+        $protein_aufbau_gramm = $gewichtkcal * $protein_aufbau_faktor;
         $protein_aufbau_kcal = $protein_aufbau_gramm * 4;
-        $protein_defizit_gramm = $gewichtkcal["gewicht"] * $protein_defizit_faktor;
+        $protein_defizit_gramm = $gewichtkcal * $protein_defizit_faktor;
         $protein_defizit_kcal = $protein_defizit_gramm * 4;
 
         $fettfaktor = 0.25;
