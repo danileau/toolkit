@@ -44,7 +44,7 @@ class GewichtRepository extends ServiceEntityRepository
 
     public function getLastGewicht($id){
         return $this->createQueryBuilder('g')
-            ->select('g.gewicht')
+            ->select('g.gewicht, g.bf')
             ->where('g.user = :user')
             ->orderBy('g.timestamp', 'DESC')
             ->setMaxResults(1)

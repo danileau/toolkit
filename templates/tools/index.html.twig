@@ -84,6 +84,19 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-body">
+                                                <h5 class="card-title mb-4">Fettfreie Masse <i class="align-middle" data-feather="dribbble"></i></h5>
+                                                <h1 class="mt-1 mb-3">{{FFM|number_format(2)}} kg</h1>
+                                                <div class="mb-1">
+                                                    {% if FFM == 0 %}
+                                                        <span class="text-muted">Gewicht und Körperfettprozent benötigt</span>
+                                                    {% else %}
+                                                        <span class="text-muted">Dein Gewicht bei 0% Körperfett</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
                                                 <h5 class="card-title mb-4 text-danger" data-toggle="modal" data-target="#proteinInfo">Proteine <i class="align-middle" data-feather="info"></i></h5>
                                                 <h4 class="text-decoration-underline">Aufbau</h4>
                                                 <h4 class="mt-1 mb-3 text-success">{{protein_aufbau_kcal|number_format}} kcal / {{ protein_aufbau_gramm|number_format }} g</h4>
@@ -162,6 +175,19 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-body">
+                                                <h5 class="card-title mb-4">Gewicht bei 10% BF <i class="align-middle" data-feather="github"></i></h5>
+                                                <h1 class="mt-1 mb-3 text-muted">{{tenBF|number_format(2)}} kg</h1>
+                                                <div class="mb-1">
+                                                    {% if tenBF == 0 %}
+                                                        <span class="text-muted">Gewicht und Körperfettprozent benötigt</span>
+                                                    {% else %}
+                                                        <span class="text-muted">Dein Gewicht bei 10% Körperfett</span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
                                                 <h5 class="card-title mb-4 text-warning" data-toggle="modal" data-target="#fettInfo">Fette <i class="align-middle" data-feather="info"></i></h5>
                                                 <h4 class="text-decoration-underline">Aufbau</h4>
                                                 <h4 class="mt-1 mb-3 text-success">{{fett_aufbau_kcal|number_format}} kcal / {{ fett_aufbau_gramm|number_format }} g</h4>
@@ -225,6 +251,19 @@
                                                 <h1 class="mt-1 mb-3">{{ current_gewicht|number_format(2)}} kg</h1>
                                                 <div class="mb-1">
                                                     <span class="text-muted">Dein aktuelles Gewicht</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-4">Gewicht bei 20% BF <i class="align-middle" data-feather="gitlab"></i></h5>
+                                                <h1 class="mt-1 mb-3 text-muted">{{twentyBF|number_format(2)}} kg</h1>
+                                                <div class="mb-1">
+                                                    {% if twentyBF == 0 %}
+                                                        <span class="text-muted">Gewicht und Körperfettprozent benötigt</span>
+                                                    {% else %}
+                                                        <span class="text-muted">Dein Gewicht bei 20% Körperfett</span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

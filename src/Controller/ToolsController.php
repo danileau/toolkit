@@ -33,6 +33,7 @@ class ToolsController extends AbstractController
                 $currentGewicht = 0;
                 $lastSevenDaysGewicht = 0;
                 $lastSevenCompGewicht = 0;
+                $currentBF = 0;
                 $avg_lastSeven = 0;
                 $avg_lastSevenComp = 0;
                 $lastSevenGewicht_percent = 0;
@@ -41,6 +42,7 @@ class ToolsController extends AbstractController
                 $Gewicht = $gewichtRepository->getLastGewicht($user);
                 $gewichtkcal = $gewichtRepository->getLastGewichtforKcal($user);
                 $currentGewicht = $Gewicht["gewicht"];
+                $currentBF = $Gewicht["bf"];
                 $lastSevenDaysGewicht = 0;
                 $lastSevenCompGewicht = 0;
                 $avg_lastSeven = 0;
@@ -51,6 +53,7 @@ class ToolsController extends AbstractController
                 $gewichtkcal = $gewichtRepository->getLastGewichtforKcal($user);
                 $Gewicht = $gewichtRepository->getLastGewicht($user);
                 $currentGewicht = $Gewicht["gewicht"];
+                $currentBF = $Gewicht["bf"];
                 $lastSevenDaysGewicht = $gewichtRepository->getLastSevenGewicht($user);
                 $lastSevenCompGewicht = $gewichtRepository->getLastSevenCompGewicht($user);
 
@@ -165,6 +168,10 @@ class ToolsController extends AbstractController
         $carbs_defizit_kcal = $defizit - $protein_defizit_kcal - $fett_defizit_kcal;
         $carbs_defizit_gramm = $carbs_defizit_kcal / 4;
 
+        $FFM = $currentGewicht * (1 - ($currentBF/100));
+        $gewicht_10bf = $FFM / 0.9;
+        $gewicht_20bf = $FFM / 0.8;
+
         return $this->render('tools/index.html.twig', [
             'controller_name' => 'ToolsController',
             'current_gewicht' => $currentGewicht,
@@ -200,7 +207,10 @@ class ToolsController extends AbstractController
             'gewicht_m_month' => $gewicht_m_MonthJSON,
             'gewicht_data' => $gewichtValueJSON,
             'gewicht_m_data' => $gewicht_m_ValueJSON,
-            'gewicht_bf_data' => $bf_m_ValueJSON
+            'gewicht_bf_data' => $bf_m_ValueJSON,
+            'FFM' => $FFM,
+            'tenBF' => $gewicht_10bf,
+            'twentyBF' => $gewicht_20bf
         ]);
     }
 }
