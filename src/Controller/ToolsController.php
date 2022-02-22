@@ -169,8 +169,13 @@ class ToolsController extends AbstractController
         $carbs_defizit_gramm = $carbs_defizit_kcal / 4;
 
         $FFM = $currentGewicht * (1 - ($currentBF/100));
+
         $gewicht_10bf = $FFM / 0.9;
         $gewicht_20bf = $FFM / 0.8;
+        $kcal_bis_10bf = ($currentGewicht-$gewicht_10bf)*7000;
+        $tage_bis_10bf = $kcal_bis_10bf / 400;
+        $kcal_bis_20bf = ($currentGewicht-$gewicht_20bf)*7000;
+        $tage_bis_20bf = $kcal_bis_20bf / 400;
 
         return $this->render('tools/index.html.twig', [
             'controller_name' => 'ToolsController',
@@ -210,7 +215,11 @@ class ToolsController extends AbstractController
             'gewicht_bf_data' => $bf_m_ValueJSON,
             'FFM' => $FFM,
             'tenBF' => $gewicht_10bf,
-            'twentyBF' => $gewicht_20bf
+            'twentyBF' => $gewicht_20bf,
+            'kcalBis10BF' => $kcal_bis_10bf,
+            'kcalBis20BF' => $kcal_bis_20bf,
+            'tageBis10BF' => $tage_bis_10bf,
+            'tageBis20BF' => $tage_bis_20bf
         ]);
     }
 }
