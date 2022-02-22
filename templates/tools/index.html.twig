@@ -185,11 +185,13 @@
                                                             {% if kcalBis10BF < 0 %}
                                                                 Noch {{ (kcalBis10BF|abs)|number_format(0, '.', '\'') }} kcal müssen zus. aufgenommen werden<br/>
                                                                 Das dauert ca. {{ (tageBis10BF|abs)|number_format(0, '.', '\'') }} Tage, bei einem täglichen Überschuss von 300 kcal.<br/>
-                                                                {{ (tageBis10BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 400 kcal
+                                                                {{ (tageBis10BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 400 kcal.<br/>
+                                                                {{ (tageBis10BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 500 kcal
                                                             {% else %}
                                                                 Noch {{ (kcalBis10BF)|number_format(0, '.', '\'') }} kcal müssen eingespart werden<br/>
                                                                 Das dauert ca. {{ tageBis10BF|number_format(0, '.', '\'') }} Tage, bei einem täglichen Defizit von 300 kcal.<br/>
-                                                                {{ (tageBis10BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 400 kcal
+                                                                {{ (tageBis10BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 400 kcal.<br/>
+                                                                {{ (tageBis10BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 500 kcal
                                                             {% endif %}
                                                         </span>
                                                     {% endif %}
@@ -276,11 +278,13 @@
                                                             {% if kcalBis20BF < 0 %}
                                                                 Noch {{ (kcalBis20BF|abs)|number_format(0, '.', '\'') }} kcal müssen zus. aufgenommen werden<br/>
                                                                 Das dauert ca. {{ (tageBis20BF|abs)|number_format(0, '.', '\'') }} Tage, bei einem täglichen Überschuss von 300 kcal.<br/>
-                                                                {{ (tageBis20BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 400 kcal
+                                                                {{ (tageBis20BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 400 kcal.<br/>
+                                                                {{ (tageBis20BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 500 kcal.
                                                             {% else %}
                                                                 Noch {{ (kcalBis20BF)|number_format(0, '.', '\'') }} kcal müssen eingespart werden<br/>
                                                                 Das dauert ca. {{ tageBis20BF|number_format(0, '.', '\'') }} Tage, bei einem täglichen Defizit von 300 kcal.<br/>
-                                                                {{ (tageBis20BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 400 kcal
+                                                                {{ (tageBis20BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 400 kcal.<br/>
+                                                                {{ (tageBis20BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 500 kcal.
                                                             {% endif %}
                                                         </span>
                                                     {% endif %}

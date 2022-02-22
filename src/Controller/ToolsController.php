@@ -175,9 +175,11 @@ class ToolsController extends AbstractController
         $kcal_bis_10bf = ($currentGewicht-$gewicht_10bf)*7000;
         $tage_bis_10bf = $kcal_bis_10bf / 300;
         $tage_bis_10bf_400 = $kcal_bis_10bf / 400;
+        $tage_bis_10bf_500 = $kcal_bis_10bf / 500;
         $kcal_bis_20bf = ($currentGewicht-$gewicht_20bf)*7000;
         $tage_bis_20bf = $kcal_bis_20bf / 300;
         $tage_bis_20bf_400 = $kcal_bis_20bf / 400;
+        $tage_bis_20bf_500 = $kcal_bis_20bf / 500;
 
         return $this->render('tools/index.html.twig', [
             'controller_name' => 'ToolsController',
@@ -222,8 +224,10 @@ class ToolsController extends AbstractController
             'kcalBis20BF' => $kcal_bis_20bf,
             'tageBis10BF' => $tage_bis_10bf,
             'tageBis10BF_400' => $tage_bis_10bf_400,
+            'tageBis10BF_500' => $tage_bis_10bf_500,
             'tageBis20BF' => $tage_bis_20bf,
-            'tageBis20BF_400' => $tage_bis_20bf_400
+            'tageBis20BF_400' => $tage_bis_20bf_400,
+            'tageBis20BF_500' => $tage_bis_20bf_500
         ]);
     }
 }
