@@ -35,7 +35,7 @@
                                 {% for gewicht in gewichts %}
                                     <tr>
                                         <td>{{ gewicht.gewicht }} kg</td>
-                                        <td>{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y H:i:s') : '' }}</td>
+                                        <td data-sort="{{ gewicht.timestamp ? gewicht.timestamp|date('Y-m-dT00:00:00Z') : '' }}">{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y') : '' }}</td>
                                         <td>{% if gewicht.bf is empty %} - {% else %}{{ gewicht.bf }}%{% endif %}</td>
                                         <td>{% if (gewicht.calculate == 0) or (gewicht.calculate is empty) %} - {% else %} true {% endif %}</td>
                                         <td>
@@ -71,6 +71,7 @@
             // Datatables Responsive
             $("#datatables-reponsive").DataTable({
               responsive: true,
+              ordering: true,
               order: [[ 1, "desc" ]]
             });
           });

@@ -8,5 +8,5 @@
 /.idea/
 /var/*
 ###< symfony/framework-bundle ###
-
 .env
+/bin/symfony
