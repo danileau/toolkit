@@ -64,9 +64,11 @@ class ToolsController extends AbstractController
                 $avg_lastSevenComp = (!empty($arranged_lastSevenComp) ? array_sum($arranged_lastSevenComp) / count($arranged_lastSevenComp) : 0);
 
                 $lastSevenGewicht_percent = ($avg_lastSeven - $avg_lastSevenComp) / $avg_lastSeven * 100;
+
+
+
                 break;
         }
-
         /**
          * Switch Logic for PAL Values
          */
@@ -184,7 +186,7 @@ class ToolsController extends AbstractController
         return $this->render('tools/index.html.twig', [
             'controller_name' => 'ToolsController',
             'current_gewicht' => $currentGewicht,
-            'gewicht_avg_7' => $avg_lastSeven,
+            'gewicht_avg_7' => $Gewicht['floating_weight'],
             'gewicht_percent' => $lastSevenGewicht_percent,
             'pal' => $last_PAL['value'],
             'gewichtkcal' => $gewichtkcal,

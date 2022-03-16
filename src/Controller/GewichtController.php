@@ -50,6 +50,14 @@ class GewichtController extends AbstractController
                $gewichtRepository->setAllCalulculateFalse($user->getId());
             }
             $gewichtvalue->setCalculate($gewichtvalue->getCalculate());
+            // Check if there are more than 6 Gewicht Entries
+            $last_seven_gewicht = $gewichtRepository->getLastSevenGewicht($user);
+            if(count($last_seven_gewicht) >= 7){
+                $arranged_lastSeven = array($last_seven_gewicht[0]['gewicht'], $last_seven_gewicht[1]['gewicht'], $last_seven_gewicht[2]['gewicht'], $last_seven_gewicht[3]['gewicht'], $last_seven_gewicht[4]['gewicht'], $last_seven_gewicht[5]['gewicht'], $last_seven_gewicht[6]['gewicht']);
+                $avg_lastSeven = (!empty($arranged_lastSeven) ? array_sum($arranged_lastSeven) / count($arranged_lastSeven) : 0);
+                $gewichtvalue->setFloatingWeight($avg_lastSeven);
+            }
+
             $entityManager->persist($gewicht);
             $entityManager->flush();
 

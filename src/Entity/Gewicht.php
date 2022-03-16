@@ -47,6 +47,11 @@ class Gewicht
      */
     private $calculate;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $floating_weight;
+
 
     public function getId(): ?int
     {
@@ -109,6 +114,18 @@ class Gewicht
     public function setCalculate(?bool $calculate): self
     {
         $this->calculate = $calculate;
+
+        return $this;
+    }
+
+    public function getFloatingWeight(): ?float
+    {
+        return $this->floating_weight;
+    }
+
+    public function setFloatingWeight(?float $floating_weight): self
+    {
+        $this->floating_weight = $floating_weight;
 
         return $this;
     }

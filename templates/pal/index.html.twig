@@ -44,7 +44,7 @@
                                         <td>{{ pal.gehend }}</td>
                                         <td>{{ pal.stehend }}</td>
                                         <td>{{ pal.sport }}</td>
-                                        <td>{{ pal.timestamp ? pal.timestamp|date('d.m.Y H:i:s') : '' }}</td>
+                                        <td data-sort="{{ pal.timestamp ? pal.timestamp|date('Y-m-dT00:00:00Z') : '' }}">{{ pal.timestamp ? pal.timestamp|date('d.m.Y') : '' }}</td>
                                         <td>{{ pal.value|number_format(2) }}</td>
                                         <td>
                                             <div class="position-relative">
