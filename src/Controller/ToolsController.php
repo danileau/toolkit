@@ -127,8 +127,8 @@ class ToolsController extends AbstractController
             $gewichtkcal = $gewichtkcal['gewicht'];
             $gesamtEnergieBedarf = $grundumsatz * $last_PAL['value'];
             if ($gesamtEnergieBedarf != 0) {
-                $aufbau = $gesamtEnergieBedarf + 300;
-                $defizit = $gesamtEnergieBedarf - 300;
+                $aufbau = $gesamtEnergieBedarf + 400;
+                $defizit = $gesamtEnergieBedarf - 400;
             } else {
                 $aufbau = 0;
                 $defizit = 0;
