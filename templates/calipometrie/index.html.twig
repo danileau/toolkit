@@ -1,0 +1,93 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Körperfettanteil Messungen Übersicht{% endblock %}
+
+{% block body %}
+
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">Körperfettanteil Messungen Übersicht</h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title"></h5>
+                            <b><a href="{{ path('calipometrie_new') }}" class="align-middle">Neue 7-Falten Messung</a></b><br/>
+                            <p>Untenstehen sind die Positionen eingezeichnet, wo mit dem Caliper gemessen werden muss:</p>
+                            <span class="image"><img src="{{ asset('img/7-Punkte-Methode-Caliper-Messung.jpg') }}" alt="Messungs Positionen" /></span>
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Körperfettanteil</th>
+                                    <th>Bauch</th>
+                                    <th>Brust</th>
+                                    <th>Hüfte</th>
+                                    <th>Trizeps</th>
+                                    <th>Bein</th>
+                                    <th>Achsel</th>
+                                    <th>Rücken</th>
+                                    <th>Aktionen</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for messung in calipometries %}
+                                    <tr>
+                                        <td data-sort="{{ messung.timestamp ? messung.timestamp|date('Y-m-dT00:00:00Z') : '' }}">{{ messung.timestamp ? messung.timestamp|date('d.m.Y') : '' }}</td>
+                                        <td>{% if messung.bodyfat is empty %} - {% else %}{{ messung.bodyfat | round(3)}}%{% endif %}</td>
+                                        <td>{% if messung.bauch is empty %} - {% else %}{{ messung.bauch }}mm{% endif %}</td>
+                                        <td>{% if messung.brust is empty %} - {% else %}{{ messung.brust }}mm{% endif %}</td>
+                                        <td>{% if messung.huefte is empty %} - {% else %}{{ messung.huefte }}mm{% endif %}</td>
+                                        <td>{% if messung.trizeps is empty %} - {% else %}{{ messung.trizeps }}mm{% endif %}</td>
+                                        <td>{% if messung.bein is empty %} - {% else %}{{ messung.bein }}mm{% endif %}</td>
+                                        <td>{% if messung.achsel is empty %} - {% else %}{{ messung.achsel }}mm{% endif %}</td>
+                                        <td>{% if messung.ruecken is empty %} - {% else %}{{ messung.ruecken }}mm{% endif %}</td>
+                                        
+                                        <td>
+                                            <div class="position-relative">
+                                                <a title="show" href="{{ path('calipometrie_show', {'id': messung.id}) }}"><i class="align-middle" data-feather="search"></i></a>
+                                                <a title="edit" href="{{ path('calipometrie_edit', {'id': messung.id}) }}"><i class="align-middle" data-feather="edit" ></i></a>
+                                                <a title="delete" href="{{ path('calipometrie_delete', {'id': messung.id}) }}"><i class="align-middle" data-feather="trash-2" ></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">Keine Einträge gefunden</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>    
+
+
+{% endblock %}
+
+
+    {% block js %}
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Responsive
+            $("#datatables-reponsive").DataTable({
+              responsive: true,
+              ordering: true,
+              order: [[ 1, "desc" ]]
+            });
+          });
+        </script>
+
+    {% endblock %}

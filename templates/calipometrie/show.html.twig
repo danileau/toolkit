@@ -1,0 +1,59 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Messung anzeigen{% endblock %}
+
+{% block body %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">Messung anzeigen</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+
+                        </div>
+                        <div class="card-body">
+                            <table id="datatables-reponsive" class="table table-striped" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>Datum</th>
+                                    <th>Bauch</th>
+                                    <th>Brust</th>
+                                    <th>Huefte</th>
+                                    <th>Trizeps</th>
+                                    <th>Bein</th>
+                                    <th>Achsel</th>
+                                    <th>Rücken</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ calipometrie.timestamp ? calipometrie.timestamp|date('d.m.Y') : '' }}</td>
+                                        <td>{{ calipometrie.bauch }} mm</td>
+                                        <td>{{ calipometrie.brust }} mm</td>
+                                        <td>{{ calipometrie.huefte }} mm</td>
+                                        <td>{{ calipometrie.trizeps }} mm</td>
+                                        <td>{{ calipometrie.bein }} mm</td>
+                                        <td>{{ calipometrie.achsel }} mm</td>
+                                        <td>{{ calipometrie.ruecken }} mm</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href="{{ path('calipometrie_index') }}">Zurück zur Übersicht</a> -
+
+                            <b><a href="{{ path('calipometrie_edit', {'id': calipometrie.id}) }}">Bearbeiten</a></b>
+
+                            {{ include('calipometrie/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}

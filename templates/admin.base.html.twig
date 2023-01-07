@@ -59,6 +59,17 @@
                         <li class="sidebar-item {% if app.request.attributes.get('_route') == 'gewicht_new' %}active{% endif %}"><a class="sidebar-link" href="{{ path('gewicht_new') }}">Erstellen</a></li>
                     </ul>
                 </li>
+
+                <li class="sidebar-item">
+                    <a data-target="#rechner" class="sidebar-link ">
+                        <i class="align-middle" data-feather="minimize-2"></i> <span class="align-middle">Körperfettanteil Rechner</span>
+                    </a>
+                    <ul id="calipometrie" class="sidebar-dropdown list-unstyled " data-parent="#rechner">
+                        <li class="sidebar-item {% if app.request.attributes.get('_route') == 'calipometrie_index' %}active{% endif %}"><a class="sidebar-link" href="{{ path('calipometrie_index') }}">Übersicht</a></li>
+                        <li class="sidebar-item {% if app.request.attributes.get('_route') == 'calipometrie_new' %}active{% endif %}"><a class="sidebar-link" href="{{ path('calipometrie_new') }}">Erstellen</a></li>
+                        
+                    </ul>
+                </li>
                 {% if is_granted('ROLE_ADMIN') %}
                     <li class="sidebar-item">
                         <a data-target="#users" class="sidebar-link ">

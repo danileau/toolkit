@@ -26,7 +26,7 @@ class ToolsController extends AbstractController
 
         global $count_all_gewicht;
         $count_all_gewicht= count($all_Gewicht_user);
-
+        
         switch(true){
             case $count_all_gewicht == 0:
                 $gewichtkcal = 0;
@@ -68,6 +68,12 @@ class ToolsController extends AbstractController
 
 
                 break;
+        }
+        /**
+         * Ugly isset handler
+         */
+        if (!isset($Gewicht['floating_weight'])){
+            $Gewicht['floating_weight'] = 0;
         }
         /**
          * Switch Logic for PAL Values
@@ -127,8 +133,8 @@ class ToolsController extends AbstractController
             $gewichtkcal = $gewichtkcal['gewicht'];
             $gesamtEnergieBedarf = $grundumsatz * $last_PAL['value'];
             if ($gesamtEnergieBedarf != 0) {
-                $aufbau = $gesamtEnergieBedarf + 400;
-                $defizit = $gesamtEnergieBedarf - 400;
+                $aufbau = $gesamtEnergieBedarf + 300;
+                $defizit = $gesamtEnergieBedarf - 300;
             } else {
                 $aufbau = 0;
                 $defizit = 0;

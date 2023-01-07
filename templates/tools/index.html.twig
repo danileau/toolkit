@@ -59,14 +59,20 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Aufbau <i class="align-middle" data-feather="arrow-up"></i></h5>
-                                                <h1 class="mt-1 mb-3 text-success">{{aufbau|number_format}} kcal</h1>
+                                                <h1 class="mt-1 mb-3 text-success">
+                                                    {% if aufbau == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{aufbau|number_format}} kcal
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if pal == 0 %}
                                                         <span class="text-muted">PAL benötigt</span>
                                                     {% elseif gewichtkcal == 0%}
                                                         <span class="text-muted">Gewicht zum berechnen benötigt</span>
                                                     {% else %}
-                                                        <span class="text-muted">+400kcal</span>
+                                                        <span class="text-muted">+300kcal</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -74,12 +80,18 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">PAL <i class="align-middle" data-feather="sun"></i></h5>
-                                                <h1 class="mt-1 mb-3">{{pal|number_format(3)}}</h1>
+                                                <h1 class="mt-1 mb-3">
+                                                    {% if pal == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{pal|number_format(3)}}
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if pal == 0 %}
-                                                    <span class="text-muted">Min. 1 Eintrag benötigt</span>
+                                                        <span class="text-muted">Min. 1 Eintrag benötigt</span>
                                                     {% else %}
-
+                                                        <span class="text-muted">Physical Activity Level</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -87,45 +99,54 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Fettfreie Masse <i class="align-middle" data-feather="dribbble"></i></h5>
-                                                <h1 class="mt-1 mb-3">{{FFM|number_format(2)}} kg</h1>
+                                                <h1 class="mt-1 mb-3">
+                                                    {% if FFM == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{FFM|number_format(2)}} kg
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if FFM == 0 %}
                                                         <span class="text-muted">Gewicht und Körperfettprozent benötigt</span>
                                                     {% else %}
-                                                        <span class="text-muted">Dein Gewicht bei 0% Körperfett</span>
+                                                        <span class="text-muted">Dein Gewicht bei 0% Körperfett<br/>
+                                                         - Nur theoretisch (!)
+                                                        </span>
                                                     {% endif %}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-4 text-danger" data-toggle="modal" data-target="#proteinInfo">Proteine <i class="align-middle" data-feather="info"></i></h5>
-                                                <h4 class="text-decoration-underline">Aufbau</h4>
-                                                <h4 class="mt-1 mb-3 text-success">{{protein_aufbau_kcal|number_format}} kcal / {{ protein_aufbau_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Erhalt</h4>
-                                                <h4 class="mt-1 mb-3 text-secondary">{{protein_erhalt_kcal|number_format}} kcal / {{ protein_erhalt_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Defizit</h4>
-                                                <h4 class="mt-1 mb-3 text-danger">{{protein_defizit_kcal|number_format}} kcal / {{ protein_defizit_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Refeed</h4>
-                                                <h4 class="mt-1 mb-3 text-primary">{{protein_defizit_kcal|number_format}} kcal / {{ protein_defizit_gramm|number_format }} g</h4>
+                                                <h5 class="card-title mb-4 text-secondary" data-toggle="modal" data-target="#AufbauInfo">Nährstoffverteilung im Aufbau <i class="align-middle" data-feather="info"></i></h5>
+                                                <h4 class="text-decoration-underline">Proteine</h4>
+                                                <h4 class="mt-1 mb-3 text-danger">{{protein_aufbau_kcal|number_format}} kcal / {{ protein_aufbau_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Fette</h4>
+                                                <h4 class="mt-1 mb-3 text-warning">{{fett_aufbau_kcal|number_format}} kcal / {{ fett_aufbau_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Kohlenhydrate</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{carbs_aufbau_kcal|number_format}} kcal / {{ carbs_aufbau_gramm|number_format }} g</h4>
 
-                                                <div class="modal fade" id="proteinInfo" tabindex="-1" aria-hidden="true" style="display: none;">
+                                                <div class="modal fade" id="AufbauInfo" tabindex="-1" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Berechnung der Proteinverteilung</h4>
+                                                                <h4 class="modal-title">Berechnung der Makronährstoffverteilung im Aufbau</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body m-3">
-                                                                <p class="mb-0"><b>Aufbau:</b><br/>
+                                                                <p class="mb-0"><b>Protein:</b><br/>
                                                                     Gewicht * <b>2</b> = Gramm Protein * 4 kcal/g = Kalorienanteil Proteine
                                                                 </p>
-                                                                <p class="mb-0"><b>Erhalt, Defizit & Refeed:</b><br/>
-                                                                    Gewicht * <b>2.3</b> = Gramm Protein * 4 kcal/g = Kalorienanteil Proteine
+                                                                <p class="mb-0"><b>Fett:</b><br/>
+                                                                    Gesamtenergiebedarf * <b>0.25</b> = Kalorienanteil Fette : 9kcal/g = Gramm Fette
                                                                 </p>
-                                                            </div>
+																<p class="mb-0"><b>Kohlenhydrate:</b><br/>
+                                                                    Gesamtenergiebedarf - Kalorienanteil Proteine - Kalorienanteil Fette = Kalorienanteil Kohlenhydrate : 4kcal/g = Gramm Kohlenhydrate
+                                                                </p>
+                                                            </div>	
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
                                                             </div>
@@ -147,7 +168,13 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Erhalt <i class="align-middle" data-feather="minus"></i></h5>
-                                                <h1 class="mt-1 mb-3 text-secondary">{{erhalt|number_format}} kcal</h1>
+                                                <h1 class="mt-1 mb-3 text-secondary">
+                                                    {% if erhalt == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{erhalt|number_format}} kcal
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if pal == 0 %}
                                                         <span class="text-muted">PAL benötigt</span>
@@ -162,7 +189,13 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Gleitendes Gewicht <i class="align-middle" data-feather="activity"></i></h5>
-                                                <h1 class="mt-1 mb-3">{{ gewicht_avg_7|number_format(2)}} kg</h1>
+                                                <h1 class="mt-1 mb-3">
+                                                    {% if gewicht_avg_7 == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{ gewicht_avg_7|number_format(2)}} kg
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if gewicht_avg_7 == 0 %}
                                                         <span class="text-muted">Min. 7 Einträge benötigt</span>
@@ -180,22 +213,24 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Gewicht bei 10% BF <i class="align-middle" data-feather="github"></i></h5>
-                                                <h1 class="mt-1 mb-3 text-muted">{{tenBF|number_format(2)}} kg</h1>
+                                                <h1 class="mt-1 mb-3 text-muted">
+                                                    {% if tenBF == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{tenBF|number_format(2)}} kg
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if tenBF == 0 %}
                                                         <span class="text-muted">Gewicht und Körperfettprozent benötigt</span>
                                                     {% else %}
                                                         <span class="text-muted">
                                                             {% if kcalBis10BF < 0 %}
-                                                                Noch {{ (kcalBis10BF|abs)|number_format(0, '.', '\'') }} kcal müssen zus. aufgenommen werden<br/>
-                                                                Das dauert ca. {{ (tageBis10BF|abs)|number_format(0, '.', '\'') }} Tage, bei einem täglichen Überschuss von 300 kcal.<br/>
-                                                                {{ (tageBis10BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 400 kcal.<br/>
-                                                                {{ (tageBis10BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 500 kcal
+                                                                Noch <u>{{ (kcalBis10BF|abs)|number_format(0, '.', '\'') }} kcal</u> müssen zus. aufgenommen werden<br/>
+                                                                Aufbau +300kcal/Tag: ca. {{ (tageBis10BF|abs)|number_format(0, '.', '\'') }} Tage
                                                             {% else %}
-                                                                Noch {{ (kcalBis10BF)|number_format(0, '.', '\'') }} kcal müssen eingespart werden<br/>
-                                                                Das dauert ca. {{ tageBis10BF|number_format(0, '.', '\'') }} Tage, bei einem täglichen Defizit von 300 kcal.<br/>
-                                                                {{ (tageBis10BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 400 kcal.<br/>
-                                                                {{ (tageBis10BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 500 kcal
+                                                                Noch <u>{{ (kcalBis10BF)|number_format(0, '.', '\'') }} kcal</u> müssen eingespart werden<br/>
+                                                                Defizit -300kcal/Tag: ca. {{ tageBis10BF|number_format(0, '.', '\'') }} Tage
                                                             {% endif %}
                                                         </span>
                                                     {% endif %}
@@ -204,33 +239,34 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-4 text-warning" data-toggle="modal" data-target="#fettInfo">Fette <i class="align-middle" data-feather="info"></i></h5>
-                                                <h4 class="text-decoration-underline">Aufbau</h4>
-                                                <h4 class="mt-1 mb-3 text-success">{{fett_aufbau_kcal|number_format}} kcal / {{ fett_aufbau_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Erhalt</h4>
-                                                <h4 class="mt-1 mb-3 text-secondary">{{fett_erhalt_kcal|number_format}} kcal / {{ fett_erhalt_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Defizit</h4>
-                                                <h4 class="mt-1 mb-3 text-danger">{{fett_defizit_kcal|number_format}} kcal / {{ fett_defizit_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Refeed</h4>
-                                                <h4 class="mt-1 mb-3 text-primary">{{fett_refeed_kcal|number_format}} kcal / {{ fett_refeed_gramm|number_format }} g</h4>
-
-                                                <div class="modal fade" id="fettInfo" tabindex="-1" aria-hidden="true" style="display: none;">
+                                                <h5 class="card-title mb-4 text-secondary" data-toggle="modal" data-target="#ErhaltInfo">Nährstoffverteilung im Erhalt <i class="align-middle" data-feather="info"></i></h5>
+                                                <h4 class="text-decoration-underline">Proteine</h4>
+                                                <h4 class="mt-1 mb-3 text-danger">{{protein_erhalt_kcal|number_format}} kcal / {{ protein_erhalt_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Fette</h4>
+                                                <h4 class="mt-1 mb-3 text-warning">{{fett_erhalt_kcal|number_format}} kcal / {{ fett_erhalt_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Kohlenhydrate</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{carbs_erhalt_kcal|number_format}} kcal / {{ carbs_erhalt_gramm|number_format }} g</h4>
+                                                
+                                                <div class="modal fade" id="ErhaltInfo" tabindex="-1" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Berechnen der Fettverteilung</h4>
+                                                                <h4 class="modal-title">Berechnung der Makronährstoffverteilung im Erhalt</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body m-3">
-                                                                <p class="mb-0"><b>Aufbau, Erhalt & Defizit:</b><br/>
-                                                                    Gesamtenergiebedarf * 0.25 = Kalorienanteil Fette : 9 kcal/g = Gramm Fette
+                                                                <p class="mb-0"><b>Protein:</b><br/>
+                                                                    Gewicht * <b>2.3</b> = Gramm Protein * 4 kcal/g = Kalorienanteil Proteine
                                                                 </p>
-                                                                <p class="mb-0"><b>Refeed:</b><br/>
-                                                                    Gesamtenergiebedarf * 0.09 = Kalorienanteil Fette : 9 kcal/g = Gramm Fette
+                                                                <p class="mb-0"><b>Fett:</b><br/>
+                                                                    Gesamtenergiebedarf * <b>0.25</b> = Kalorienanteil Fette : 9kcal/g = Gramm Fette
                                                                 </p>
-                                                            </div>
+																<p class="mb-0"><b>Kohlenhydrate:</b><br/>
+                                                                    Gesamtenergiebedarf - Kalorienanteil Proteine - Kalorienanteil Fette = Kalorienanteil Kohlenhydrate : 4kcal/g = Gramm Kohlenhydrate
+                                                                </p>
+                                                            </div>	
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
                                                             </div>
@@ -251,14 +287,20 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4 align-middle">Defizit <i class="align-middle" data-feather="arrow-down"></i></h5>
-                                                <h1 class="mt-1 mb-3 text-danger">{{defizit|number_format}} kcal</h1>
+                                                <h1 class="mt-1 mb-3 text-danger">
+                                                {% if defizit == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{defizit|number_format}} kcal
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if pal == 0 %}
                                                         <span class="text-muted">PAL benötigt</span>
                                                     {% elseif gewichtkcal == 0%}
                                                         <span class="text-muted">Gewicht zum berechnen benötigt</span>
                                                     {% else %}
-                                                        <span class="text-muted">-400kcal</span>
+                                                        <span class="text-muted">-300kcal</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -266,31 +308,43 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Aktuelles Gewicht <i class="align-middle" data-feather="user"></i></h5>
-                                                <h1 class="mt-1 mb-3">{{ current_gewicht|number_format(2)}} kg</h1>
+                                                <h1 class="mt-1 mb-3">
+                                                    {% if current_gewicht == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{ current_gewicht|number_format(2)}} kg
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
-
+                                                    {% if current_gewicht == 0 %}
+                                                        <span class="text-muted">Min. 1 Eintrag benötigt</span>
+                                                    {% else %}
+                                                        <span class="text-muted">Dein aktuelles Gewicht</span>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title mb-4">Gewicht bei 20% BF <i class="align-middle" data-feather="gitlab"></i></h5>
-                                                <h1 class="mt-1 mb-3 text-muted">{{twentyBF|number_format(2)}} kg</h1>
+                                                <h1 class="mt-1 mb-3 text-muted">
+                                                    {% if twentyBF == 0 %}
+                                                        -
+                                                    {% else %}
+                                                        {{twentyBF|number_format(2)}} kg
+                                                    {% endif %}
+                                                </h1>
                                                 <div class="mb-1">
                                                     {% if twentyBF == 0 %}
                                                         <span class="text-muted">Gewicht und Körperfettprozent benötigt</span>
                                                     {% else %}
                                                         <span class="text-muted">
                                                             {% if kcalBis20BF < 0 %}
-                                                                Noch {{ (kcalBis20BF|abs)|number_format(0, '.', '\'') }} kcal müssen zus. aufgenommen werden<br/>
-                                                                Das dauert ca. {{ (tageBis20BF|abs)|number_format(0, '.', '\'') }} Tage, bei einem täglichen Überschuss von 300 kcal.<br/>
-                                                                {{ (tageBis20BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 400 kcal.<br/>
-                                                                {{ (tageBis20BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Überschuss von 500 kcal.
+                                                                Noch <u>{{ (kcalBis20BF|abs)|number_format(0, '.', '\'') }} kcal</u> müssen zus. aufgenommen werden<br/>
+                                                                Aufbau +300kcal/Tag: ca. {{ (tageBis20BF|abs)|number_format(0, '.', '\'') }} Tage.
                                                             {% else %}
-                                                                Noch {{ (kcalBis20BF)|number_format(0, '.', '\'') }} kcal müssen eingespart werden<br/>
-                                                                Das dauert ca. {{ tageBis20BF|number_format(0, '.', '\'') }} Tage, bei einem täglichen Defizit von 300 kcal.<br/>
-                                                                {{ (tageBis20BF_400|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 400 kcal.<br/>
-                                                                {{ (tageBis20BF_500|abs)|number_format(0, '.', '\'') }} Tage bei einem Defizit von 500 kcal.
+                                                                Noch <u>{{ (kcalBis20BF)|number_format(0, '.', '\'') }} kcal</u> müssen eingespart werden<br/>
+                                                                Defizit -300kcal/Tag: ca. {{ tageBis20BF|number_format(0, '.', '\'') }} Tage.
                                                             {% endif %}
                                                         </span>
                                                     {% endif %}
@@ -299,28 +353,34 @@
                                         </div>
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title mb-4 text-success" data-toggle="modal" data-target="#carbsInfo">Kohlenhydrate <i class="align-middle" data-feather="info"></i></h5>
-                                                <h4 class="text-decoration-underline">Aufbau</h4>
-                                                <h4 class="mt-1 mb-3 text-success">{{carbs_aufbau_kcal|number_format}} kcal / {{ carbs_aufbau_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Erhalt</h4>
-                                                <h4 class="mt-1 mb-3 text-secondary">{{carbs_erhalt_kcal|number_format}} kcal / {{ carbs_erhalt_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Defizit</h4>
-                                                <h4 class="mt-1 mb-3 text-danger">{{carbs_defizit_kcal|number_format}} kcal / {{ carbs_defizit_gramm|number_format }} g</h4>
-                                                <h4 class="text-decoration-underline">Refeed</h4>
-                                                <h4 class="mt-1 mb-3 text-primary">{{carbs_refeed_kcal|number_format}} kcal / {{ carbs_refeed_gramm|number_format }} g</h4>
-                                                <div class="modal fade" id="carbsInfo" tabindex="-1" aria-hidden="true" style="display: none;">
+                                                <h5 class="card-title mb-4 text-secondary" data-toggle="modal" data-target="#DefizitInfo">Nährstoffverteilung im Defizit <i class="align-middle" data-feather="info"></i></h5>
+                                                <h4 class="text-decoration-underline">Proteine</h4>
+                                                <h4 class="mt-1 mb-3 text-danger">{{protein_defizit_kcal|number_format}} kcal / {{ protein_defizit_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Fette</h4>
+                                                <h4 class="mt-1 mb-3 text-warning">{{fett_defizit_kcal|number_format}} kcal / {{ fett_defizit_gramm|number_format }} g</h4>
+                                                <h4 class="text-decoration-underline">Kohlenhydrate</h4>
+                                                <h4 class="mt-1 mb-3 text-success">{{carbs_defizit_kcal|number_format}} kcal / {{ carbs_defizit_gramm|number_format }} g</h4>
+                                                <div class="modal fade" id="DefizitInfo" tabindex="-1" aria-hidden="true" style="display: none;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
+                                                        
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Berechnung der Kohlenhydratverteilung</h4>
+                                                                <h4 class="modal-title">Berechnung der Makronährstoffverteilung im Defizit</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body m-3">
-                                                                <p class="mb-0"><b>Aufbau, Erhalt, Defizit & Refeed:</b><br/>
-                                                                    Gesamtenergiebedarf - Kalorienanteil Proteine - Kalorienanteil Fette = Kalorienanteil Kohlenhydrate : 4kcal/g = Gramm Kohlenhydrate</p>
-                                                            </div>
+                                                                <p class="mb-0"><b>Protein:</b><br/>
+                                                                    Gewicht * <b>2.3</b> = Gramm Protein * 4 kcal/g = Kalorienanteil Proteine
+                                                                </p>
+                                                                <p class="mb-0"><b>Fett:</b><br/>
+                                                                    Gesamtenergiebedarf * <b>0.25</b> = Kalorienanteil Fette : 9kcal/g = Gramm Fette
+                                                                </p>
+																<p class="mb-0"><b>Kohlenhydrate:</b><br/>
+                                                                    Gesamtenergiebedarf - Kalorienanteil Proteine - Kalorienanteil Fette = Kalorienanteil Kohlenhydrate : 4kcal/g = Gramm Kohlenhydrate
+                                                                </p>
+                                                            </div>	
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Schliessen</button>
                                                             </div>

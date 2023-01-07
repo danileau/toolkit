@@ -27,7 +27,7 @@
                                     <th>Gewicht</th>
                                     <th>Timestamp</th>
                                     <th>Körperfettanteil</th>
-                                    <th>Berechnung</th>
+                                    <th>Ausgewählt für Berechnungen</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -37,7 +37,7 @@
                                         <td>{{ gewicht.gewicht }} kg</td>
                                         <td data-sort="{{ gewicht.timestamp ? gewicht.timestamp|date('Y-m-dT00:00:00Z') : '' }}">{{ gewicht.timestamp ? gewicht.timestamp|date('d.m.Y') : '' }}</td>
                                         <td>{% if gewicht.bf is empty %} - {% else %}{{ gewicht.bf }}%{% endif %}</td>
-                                        <td>{% if (gewicht.calculate == 0) or (gewicht.calculate is empty) %} - {% else %} true {% endif %}</td>
+                                        <td>{% if (gewicht.calculate == 0) or (gewicht.calculate is empty) %} - {% else %} selected {% endif %}</td>
                                         <td>
                                             <div class="position-relative">
                                                 <a title="show" href="{{ path('gewicht_show', {'id': gewicht.id}) }}"><i class="align-middle" data-feather="search"></i></a>

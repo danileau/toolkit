@@ -1,0 +1,45 @@
+{% extends 'admin.base.html.twig' %}
+
+{% block title %}ToolKit - Neue 7-Falten Messung{% endblock %}
+
+{% block body %}
+    <main class="content">
+        <div class="container-fluid p-0">
+
+            <div class="mb-3">
+                <h1 class="h3 d-inline align-middle">7-Falten Messung hinzufügen</h1>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Neue Messung </h5>
+                            <h6>Bitte nur den Gewichtswert eingeben <b>OHNE</b> den Zusatz "mm"</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ include('calipometrie/_form.html.twig', {'button_label': 'Erstellen'}) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}
+    {% block js %}
+        <script src="{{ asset('js/app.js')}}"></script>
+        <script src="{{ asset('js/datatables.js') }}"></script>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Datatables Responsive
+            $("#datatables-reponsive").DataTable({
+              responsive: true
+            });
+          });
+        </script>
+
+    {% endblock %}

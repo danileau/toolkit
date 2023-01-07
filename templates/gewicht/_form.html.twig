@@ -2,7 +2,9 @@
     {{ form_errors(form) }}
     {{ form_row(form.gewicht, {'label': 'Gewicht'}) }}
     {{ form_row(form.bf, {'label': 'Körperfett % - optional', 'required': false}) }}
-    {{ form_row(form.timestamp, {'label': 'Timestamp'}) }}
+    
+    {{ form_label(form.timestamp) }}: <br/>
+    {{ form_widget(form.timestamp) }}
     {{ form_row(form.calculate, {'label': 'Basierend auf diesem Gewicht Kcal berechnen'}) }}
     <br />
     <button class="btn btn-success">{{ button_label|default('Save') }}</button>

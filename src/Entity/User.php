@@ -49,10 +49,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $gewichts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calipometrie::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $calipometries;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthdate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $gender;
+
     public function __construct()
     {
         $this->PALS = new ArrayCollection();
         $this->gewichts = new ArrayCollection();
+        $this->calipometries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +191,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     public function __toString(): string {
         return $this->email;
+    }
+
+    /**
+     * @return Collection|Calipometrie[]
+     */
+    public function getCalipometries(): Collection
+    {
+        return $this->calipometries;
+    }
+
+    public function addCalipometry(Calipometrie $calipometry): self
+    {
+        if (!$this->calipometries->contains($calipometry)) {
+            $this->calipometries[] = $calipometry;
+            $calipometry->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalipometry(Calipometrie $calipometry): self
+    {
+        if ($this->calipometries->removeElement($calipometry)) {
+            // set the owning side to null (unless already changed)
+            if ($calipometry->getUser() === $this) {
+                $calipometry->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getBirthdate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
     }
 
 

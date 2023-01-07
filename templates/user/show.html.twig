@@ -23,6 +23,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Email</th>
+                                    <th>Geburtsdatum</th>
                                     <th>Rolle</th>
                                 </tr>
                                 </thead>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{ user.id }}</td>
                                     <td>{{ user.email }}</td>
+                                    <td>{{ user.birthdate|date('d.m.Y') }}</td>
                                     <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                                 </tr>
                                 </tbody>

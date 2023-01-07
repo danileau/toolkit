@@ -1,7 +1,7 @@
 
 {% extends 'admin.base.html.twig' %}
 
-{% block title %}ToolKit - PAL Calculator Übersicht{% endblock %}
+{% block title %}ToolKit - PAL Rechner Übersicht{% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,7 @@
         <div class="container-fluid p-0">
 
             <div class="mb-3">
-                <h1 class="h3 d-inline align-middle">PAL Calculator Übersicht</h1>
+                <h1 class="h3 d-inline align-middle">PAL (Physical Activity Level) Rechner Übersicht</h1>
             </div>
 
             <div class="row">
@@ -18,7 +18,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title"></h5>
-                            <b><a href="{{ path('pal_new') }}" class="align-middle">Neuer Eintrag</a></b>
+                            <b><a href="{{ path('pal_new') }}" class="align-middle">Neuer Eintrag</a></b><br/>
+                            <p>Der PAL-Wert (PAL für Physical Activity Level) drückt den täglichen Aktivitätslevel einer Person als Zahl aus.<br/>Mit seiner Hilfe lässt sich aus dem Grundumsatz der ungefähre Leistungsumsatz eines Menschen berechnen.</p>
                         </div>
                         <div class="card-body">
                             <table id="datatables-reponsive" class="table table-striped" style="width:100%">
@@ -38,12 +39,12 @@
                                 <tbody>
                                 {% for pal in pals %}
                                     <tr>
-                                        <td>{{ pal.schlaf }}</td>
-                                        <td>{{ pal.liegend }}</td>
-                                        <td>{{ pal.sitzend }}</td>
-                                        <td>{{ pal.gehend }}</td>
-                                        <td>{{ pal.stehend }}</td>
-                                        <td>{{ pal.sport }}</td>
+                                        <td>{{ pal.schlaf }}h</td>
+                                        <td>{{ pal.liegend }}h</td>
+                                        <td>{{ pal.sitzend }}h</td>
+                                        <td>{{ pal.gehend }}h</td>
+                                        <td>{{ pal.stehend }}h</td>
+                                        <td>{{ pal.sport }}h</td>
                                         <td data-sort="{{ pal.timestamp ? pal.timestamp|date('Y-m-dT00:00:00Z') : '' }}">{{ pal.timestamp ? pal.timestamp|date('d.m.Y') : '' }}</td>
                                         <td>{{ pal.value|number_format(2) }}</td>
                                         <td>

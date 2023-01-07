@@ -1,0 +1,12 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.bauch, {'label': 'Bauch in mm - optional', 'required': false}) }}
+    {{ form_row(form.brust, {'label': 'Brust in mm - optional', 'required': false}) }}
+    {{ form_row(form.huefte, {'label': 'Hüfte in mm - optional', 'required': false}) }}
+    {{ form_row(form.trizeps, {'label': 'Trizeps in mm - optional', 'required': false}) }}
+    {{ form_row(form.bein, {'label': 'Bein in mm - optional', 'required': false}) }}
+    {{ form_row(form.achsel, {'label': 'Achsel in mm - optional', 'required': false}) }}
+    {{ form_row(form.ruecken, {'label': 'Rücken in mm - optional', 'required': false}) }}
+    <br />
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
