@@ -21,7 +21,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class CalipometrieController extends AbstractController
 {
-    #[Route('/', name: 'calipometrie_index', methods: ['GET'])]
+
+    /**
+     * @Route("/", name="calipometrie_index", methods={"GET"})
+     */
     public function index(CalipometrieRepository $calipometrieRepository, UserInterface $user): Response
     {
         return $this->render('calipometrie/index.html.twig', [
@@ -29,7 +32,9 @@ class CalipometrieController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'calipometrie_new', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/new", name="calipometrie_new", methods={"GET", "POST"})
+     */
     public function new(Request $request, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
         $calipometrie = new Calipometrie();
@@ -88,7 +93,9 @@ class CalipometrieController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'calipometrie_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="calipometrie_show", methods={"GET"})
+     */
     public function show(Calipometrie $calipometrie): Response
     {
         return $this->render('calipometrie/show.html.twig', [
@@ -96,7 +103,9 @@ class CalipometrieController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'calipometrie_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit", name="calipometrie_edit", methods={"GET", "POST"})
+     */
     public function edit(Request $request, Calipometrie $calipometrie, EntityManagerInterface $entityManager, UserInterface $user): Response
     {
         $form = $this->createForm(CalipometrieType::class, $calipometrie);
@@ -161,7 +170,9 @@ class CalipometrieController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'calipometrie_delete', methods: ['POST'])]
+    /**
+     * @Route("/{id}", name="calipometrie_delete", methods={"POST"})
+     */
     public function delete(Request $request, Calipometrie $calipometrie, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$calipometrie->getId(), $request->request->get('_token'))) {
